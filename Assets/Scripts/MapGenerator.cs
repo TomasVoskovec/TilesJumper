@@ -28,11 +28,6 @@ public class MapGenerator : MonoBehaviour
             {
                 tileNumber++;
             }
-
-            if (tileNumber == 0)
-            {
-                
-            }
         }
         
     }
@@ -42,7 +37,14 @@ public class MapGenerator : MonoBehaviour
         if(isWhite)
         {
             tileWhiteZ += 0.035f;
-            Instantiate(Tiles[tileNumber], new Vector3(), new Quaternion(0, 0, 0, 0));
+            Instantiate(Tiles[tileNumber], new Vector3(0.5268289f, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+        }
+        else
+        {
+            if(tileNumber == 2)
+            {
+
+            }
         }
     }
 }
