@@ -1,31 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class move : MonoBehaviour
 {
     Rigidbody body;
+    [Header("GamePlay")]
+    public int Points;
+    public GameObject Points_UI;
+    [Space]
+    [Header("Floats")]
     public float speed;
     public float upForce = 5f;
-    bool canBounce;
-    bool moveForward;
+    public float boostForce;
+    [Space]
+    [Header("Bools")]
+    public bool canBounce;
+    public bool boost;
+    public bool moveForward;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
+        UpdateUI();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            body.velocity = transform.forward * speed;
+            boost = true;
         }
         if (canBounce)
         {
             body.AddForce(transform.up * upForce);
-            body.AddForce(transform.forward * speed);
+            if (boost)
+            {
+                body.AddForce(transform.forward * boostForce);
+            }else
+            {
+                body.AddForce(transform.forward * speed);
+            }
         }
     }
 
@@ -35,6 +50,8 @@ public class move : MonoBehaviour
         if (col.gameObject.tag == "tile")
         {
             print("Collided with tile");
+            Points++;
+            UpdateUI();
             canBounce = true;
             col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
             
@@ -43,6 +60,10 @@ public class move : MonoBehaviour
     void OnCollisionExit(Collision col)
     {
         canBounce = false;
-        
+        boost = false;
+    }
+    void UpdateUI()
+    {
+        Points_UI.GetComponent<TextMeshProUGUI>().text = Points.ToString();
     }
 }
