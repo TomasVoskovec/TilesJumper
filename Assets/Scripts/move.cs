@@ -36,6 +36,7 @@ public class move : MonoBehaviour
         {
             print("Collided with tile");
             canBounce = true;
+            col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
             
         }
     }
