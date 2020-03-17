@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
         if(isWhite)
         {
             tileWhiteZ += 0.035f;
-            Instantiate(Tiles[tileNumber], new Vector3(1,1,1))
+            //Instantiate(Tiles[tileNumber], new Vector3(1,1,1))
         }
     }
 }
