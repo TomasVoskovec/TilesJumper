@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class move : MonoBehaviour
+public class Player : MonoBehaviour
 {
     Rigidbody body;
     [Header("GamePlay")]
@@ -18,6 +18,9 @@ public class move : MonoBehaviour
     public bool canBounce;
     public bool boost;
     public bool moveForward;
+    [Space]
+    [Header("Particles")]
+    public GameObject RedSmokeParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,7 +57,7 @@ public class move : MonoBehaviour
             UpdateUI();
             canBounce = true;
             col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
-            
+            //Instantiate(RedSmokeParticle, gameObject.transform, true);
         }
     }
     void OnCollisionExit(Collision col)
