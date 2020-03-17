@@ -6,7 +6,9 @@ public class move : MonoBehaviour
 {
     Rigidbody body;
     public float speed;
+    public float upForce = 5f;
     bool canBounce;
+    bool moveForward;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,20 +16,32 @@ public class move : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             body.velocity = transform.forward * speed;
         }
+        if (canBounce)
+        {
+            body.AddForce(transform.up * upForce);
+            body.AddForce(transform.forward * speed);
+        }
     }
 
     void OnCollisionEnter(Collision col)
     {
+        
         if (col.gameObject.tag == "tile")
         {
+            print("Collided with tile");
             canBounce = true;
-            //body.velocity = transform.forward * speed;
+            
         }
+    }
+    void OnCollisionExit(Collision col)
+    {
+        canBounce = false;
+        
     }
 }
