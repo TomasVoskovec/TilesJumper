@@ -17,7 +17,7 @@ public class MapGenerator : MonoBehaviour
     public float Acceleration = 0f;
     float spawningSpeed;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         tileScale = Tiles[0].transform.localScale.x;
@@ -29,7 +29,7 @@ public class MapGenerator : MonoBehaviour
         StartCoroutine(generateMap());
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         

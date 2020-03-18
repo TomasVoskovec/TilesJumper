@@ -32,16 +32,20 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //use boost
             boost = true;
         }
         if (canBounce)
         {
+            // throw ball into the air
             body.AddForce(transform.up * upForce);
             if (boost)
             {
+                // skip one tile
                 body.AddForce(transform.forward * boostForce);
             }else
             {
+                // go to next tile
                 body.AddForce(transform.forward * speed);
             }
         }
@@ -52,21 +56,30 @@ public class Player : MonoBehaviour
         
         if (col.gameObject.tag == "tile")
         {
-            print("Collided with tile");
-            Points++;
-            UpdateUI();
-            canBounce = true;
-            col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
-            Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
+            // if player collider with a tile
+            OnTileCollide(col);
         }
+    }
+    void OnTileCollide(Collision col)
+    {
+        print("Collided with tile");
+        // add points
+        Points++;
+        UpdateUI();
+        canBounce = true;
+        col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
+        // create smoke under player
+        Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
     }
     void OnCollisionExit(Collision col)
     {
+        // when player jumps into the air
         canBounce = false;
         boost = false;
     }
     void UpdateUI()
     {
+        // update points in the UI
         Points_UI.GetComponent<TextMeshProUGUI>().text = Points.ToString();
     }
 }
