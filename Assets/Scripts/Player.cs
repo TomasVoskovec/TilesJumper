@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+       
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //use boost
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
         }
         if (canBounce)
         {
+            float i = 0;
             // throw ball into the air
             body.AddForce(transform.up * upForce);
             if (boost)
@@ -46,6 +48,8 @@ public class Player : MonoBehaviour
             }else
             {
                 // go to next tile
+                i = Time.deltaTime;
+                print(i);
                 body.AddForce(transform.forward * speed);
             }
         }
