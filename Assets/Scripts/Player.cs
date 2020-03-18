@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     public bool moveForward;
     [Space]
     [Header("Particles")]
-    public GameObject RedSmokeParticle;
+    public GameObject SmokeParticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             UpdateUI();
             canBounce = true;
             col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
-            Instantiate(RedSmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), RedSmokeParticle.transform.rotation);
+            Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
         }
     }
     void OnCollisionExit(Collision col)
