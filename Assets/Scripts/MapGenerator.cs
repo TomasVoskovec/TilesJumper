@@ -6,29 +6,44 @@ public class MapGenerator : MonoBehaviour
 {
     public List<GameObject> Tiles;
 
+    // Tiles props
     int tileNumber = 0;
     float tileWhiteZ = 0.07f;
-    float tileBlackZ = 0.0875f; //0.0175
+    float tileBlackZ = 0.0875f;
+
+    // Speed props
+    public float StartSpawningSpeed = 1f;
+    public float Acceleration = 0f;
+    float spawningSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
-        //koment
+        spawningSpeed = StartSpawningSpeed;
+        StartCoroutine(generateMap());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        
+    }
+
+    IEnumerator generateMap()
+    {
+        yield return new WaitForSeconds(0f);
+        while (true)
         {
-            if(tileNumber >= Tiles.Count)
+            if (tileNumber >= Tiles.Count)
             {
                 tileNumber = 0;
             }
 
             spawnTile(isTileWhite(tileNumber));
             tileNumber++;
+            spawningSpeed -= Acceleration;
+            yield return new WaitForSeconds(spawningSpeed);
         }
-        
     }
 
     bool isTileWhite(int num)
