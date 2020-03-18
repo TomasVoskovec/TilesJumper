@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         }
         if (canBounce)
         {
-            float i = 0;
+           
             // throw ball into the air
             body.AddForce(transform.up * upForce);
             if (boost)
@@ -48,8 +48,8 @@ public class Player : MonoBehaviour
             }else
             {
                 // go to next tile
-                i = Time.deltaTime;
-                print(i);
+                
+                //gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -5), speed * Time.deltaTime);
                 body.AddForce(transform.forward * speed);
             }
         }
