@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         Points++;
         UpdateUI();
         canBounce = true;
-        col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
+        col.gameObject.GetComponent<Animator>().SetTrigger("pushed");
         // create smoke under player
         Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
     }

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2893287625483884133}
   - component: {fileID: 499514805420224971}
   - component: {fileID: 4145501923655172706}
+  - component: {fileID: 4177129551687366745}
   m_Layer: 0
   m_Name: 9
-  m_TagString: Untagged
+  m_TagString: tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,12 +88,31 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6696903493860984626}
-  m_Material: {fileID: 13400000, guid: c88c98e9eb0661d49b17d2c7dd9ad3dc, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.2036579, y: 0.01, z: 0.03}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &4177129551687366745
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696903493860984626}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 66ab74f672638604bbd6edb9a23434e0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7726231587560673490
 GameObject:
   m_ObjectHideFlags: 0
