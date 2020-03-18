@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Floats")]
     public float speed;
-    public float upForce = 5f;
+    public float upForce;
     public float boostForce;
     [Space]
     [Header("Bools")]
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
             UpdateUI();
             canBounce = true;
             col.gameObject.GetComponentInParent<Animator>().SetTrigger("pushed");
-            //Instantiate(RedSmokeParticle, gameObject.transform, true);
+            Instantiate(RedSmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), RedSmokeParticle.transform.rotation);
         }
     }
     void OnCollisionExit(Collision col)
