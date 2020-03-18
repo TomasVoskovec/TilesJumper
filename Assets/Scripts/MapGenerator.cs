@@ -63,8 +63,6 @@ public class MapGenerator : MonoBehaviour
         {
             tileWhiteZ -= 0.035f * tileScale;
             Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
-
-            print("Is white");
         }
         else
         {
@@ -74,8 +72,6 @@ public class MapGenerator : MonoBehaviour
             }
             tileBlackZ -= 0.035f * tileScale;
             Instantiate(Tiles[tileNumber], new Vector3(0, 0, tileBlackZ), new Quaternion(0, 0, 0, 0));
-
-            print("Is black");
         }
     }
 }
