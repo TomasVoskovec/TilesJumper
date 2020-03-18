@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-    public List<GameObject> Tiles;
+    public List<GameObject> Tiles = new List<GameObject>();
 
     // Tiles props
     int tileNumber = 0;
-    float tileWhiteZ = 0.07f;
-    float tileBlackZ = 0.0875f;
+    float tileScale;
+    float tileWhiteZ;
+    float tileBlackZ;
 
     // Speed props
     public float StartSpawningSpeed = 1f;
@@ -19,6 +20,11 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tileScale = Tiles[0].transform.localScale.x;
+
+        tileWhiteZ = 0.07f * tileScale;
+        tileBlackZ = 0.0875f * tileScale;
+
         spawningSpeed = StartSpawningSpeed;
         StartCoroutine(generateMap());
     }
@@ -55,8 +61,8 @@ public class MapGenerator : MonoBehaviour
     {
         if(isWhite)
         {
-            tileWhiteZ -= 0.035f;
-            Instantiate(Tiles[tileNumber], new Vector3(0.485f, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+            tileWhiteZ -= 0.035f * tileScale;
+            Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
             print("Is white");
         }
@@ -64,9 +70,9 @@ public class MapGenerator : MonoBehaviour
         {
             if(tileNumber == 1 || tileNumber == 6)
             {
-                tileBlackZ -= 0.035f;
+                tileBlackZ -= 0.035f * tileScale;
             }
-            tileBlackZ -= 0.035f;
+            tileBlackZ -= 0.035f * tileScale;
             Instantiate(Tiles[tileNumber], new Vector3(0, 0, tileBlackZ), new Quaternion(0, 0, 0, 0));
 
             print("Is black");
