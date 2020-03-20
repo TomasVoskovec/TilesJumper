@@ -8,6 +8,8 @@ public class MapGenerator : MonoBehaviour
 
     // Tiles props
     int tileNumber = 0;
+    public int WhiteTileNumber;
+
     float tileScale;
     float tileWhiteZ;
     float tileBlackZ;
@@ -63,6 +65,7 @@ public class MapGenerator : MonoBehaviour
         {
             tileWhiteZ -= 0.035f * tileScale;
             Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+            WhiteTileNumber++;
         }
         else
         {

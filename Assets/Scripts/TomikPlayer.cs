@@ -5,15 +5,22 @@ using TMPro;
 
 public class TomikPlayer : MonoBehaviour
 {
-    public bool canLerp = false;
-    public bool canLerpNext = false;
+    bool canLerp = false;
+    bool canLerpNext = false;
 
-    public float timeStartedLerping;
-    public float lerpTime;
-    public float lerpDistance;
+    public int lerps = 0;
 
-    public Vector3 startPossition;
-    public Vector3 endPossitionn;
+    float timeStartedLerping;
+
+    Vector3 startPossition;
+    Vector3 endPossitionn;
+
+    MapGenerator mapGenerator;
+
+    public float LerpTime;
+    public float LerpDistance;
+
+    public GameObject Map;
 
     void startLerping(bool boost = false)
     {
@@ -21,11 +28,11 @@ public class TomikPlayer : MonoBehaviour
 
         if(boost)
         {
-            endPossitionn.z += lerpDistance*2;
+            endPossitionn.z += LerpDistance*2;
         }
         else
         {
-            endPossitionn.z += lerpDistance;
+            endPossitionn.z += LerpDistance;
         }
 
         canLerp = true;
@@ -34,7 +41,11 @@ public class TomikPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Get map informations
+        mapGenerator = Map.GetComponent<MapGenerator>();
+
         canLerpNext = true;
+        startPossition = transform.position;
         endPossitionn = startPossition;
     }
 
@@ -42,19 +53,27 @@ public class TomikPlayer : MonoBehaviour
     {
         if(canLerpNext)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                startLerping();
+                if (lerps + 1 < mapGenerator.WhiteTileNumber)
+                {
+                    startLerping();
+                    lerps++;
+                }
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            if(Input.GetKeyDown(KeyCode.A))
             {
-                startLerping(true);
+                if(lerps + 2 < mapGenerator.WhiteTileNumber)
+                {
+                    startLerping(true);
+                    lerps += 2;
+                }
             }
         }
 
         if(canLerp)
         {
-            transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, lerpTime);
+            transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, LerpTime);
         }
     }
 
