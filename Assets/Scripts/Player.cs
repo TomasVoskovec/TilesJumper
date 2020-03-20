@@ -4,86 +4,126 @@ using UnityEngine;
 using TMPro;
 public class Player : MonoBehaviour
 {
-    Rigidbody body;
+    bool canLerp = false;
+    bool canLerpNext = false;
+
+    public int lerps = 0;
+
+    float timeStartedLerping;
+
+    Vector3 startPossition;
+    Vector3 endPossitionn;
+
+    MapGenerator mapGenerator;
+
+    public float LerpTime;
+    public float LerpDistance;
+
+    public GameObject Map;
     [Header("GamePlay")]
     public int Points;
     public GameObject Points_UI;
     [Space]
-    [Header("Floats")]
-    public float speed;
-    public float upForce;
-    public float boostForce;
-    [Space]
-    [Header("Bools")]
-    public bool canBounce;
-    public bool boost;
-    public bool moveForward;
-    [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
+
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody>();
+        //Get map informations
+        
+        mapGenerator = Map.GetComponent<MapGenerator>();
         UpdateUI();
+        canLerpNext = true;
+        startPossition = transform.position;
+        endPossitionn = startPossition;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-       
-        if (Input.GetKeyDown(KeyCode.Space))
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.yellow);
+        if (canLerpNext)
         {
-            //use boost
-            boost = true;
-        }
-        if (canBounce)
-        {
-           
-            // throw ball into the air
-            body.AddForce(transform.up * upForce);
-            if (boost)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                // skip one tile
-                body.AddForce(transform.forward * boostForce);
-            }else
+                if (lerps + 1 < mapGenerator.WhiteTileNumber)
+                {
+                    startLerping(false);
+                    lerps++;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                // go to next tile
-                
-                //gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + -5), speed * Time.deltaTime);
-                body.AddForce(transform.forward * speed);
+                if (lerps + 2 < mapGenerator.WhiteTileNumber)
+                {
+                    startLerping(true);
+                    lerps += 2;
+                }
             }
         }
-    }
 
-    void OnCollisionEnter(Collision col)
-    {
-        
-        if (col.gameObject.tag == "tile")
+        if (canLerp)
         {
-            // if player collider with a tile
-            OnTileCollide(col);
+            transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, LerpTime);
         }
     }
-    void OnTileCollide(Collision col)
+    void startLerping(bool boost)
     {
-        print("Collided with tile");
-        // add points
+        timeStartedLerping = Time.time;
         Points++;
         UpdateUI();
-        canBounce = true;
-        col.gameObject.GetComponent<Animator>().SetTrigger("pushed");
-        // create smoke under player
-        Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
+        if (boost)
+        {
+            endPossitionn.z += LerpDistance * 2;
+        }
+        else
+        {
+            endPossitionn.z += LerpDistance;
+        }
+
+        canLerp = true;
     }
-    void OnCollisionExit(Collision col)
+    public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
     {
-        // when player jumps into the air
-        canBounce = false;
-        boost = false;
+        canLerpNext = false;
+
+        float timeSinceStarted = Time.time - timeStartedLerping;
+
+        float percentageComplete = timeSinceStarted / lerpTime;
+
+        Vector3 result = Vector3.Lerp(start, end, percentageComplete);
+
+        if (percentageComplete >= 1)
+        {
+            startPossition = endPossitionn;
+            canLerpNext = true;
+        }
+
+        return result;
     }
     void UpdateUI()
     {
         // update points in the UI
         Points_UI.GetComponent<TextMeshProUGUI>().text = Points.ToString();
     }
+    public void GenerateParticles()
+    {
+        Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
+    }
+    public void PushTile()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
+        {
+            
+            print("hit");
+            if (hit.collider.tag == "tile")
+            {
+                print("hit Tile");
+                
+                hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
+            }
+        }
+        
+    } 
 }
