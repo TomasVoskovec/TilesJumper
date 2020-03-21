@@ -42,24 +42,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.yellow);
-        if (canLerpNext)
+        if (canLerpNext && Input.touchCount > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            Touch touch = Input.GetTouch(0);
+            
+            if (lerps + 2 < mapGenerator.WhiteTileNumber)
             {
-                if (lerps + 1 < mapGenerator.WhiteTileNumber)
-                {
-                    startLerping(false);
-                    lerps++;
-                }
+                StartLerping();
+                lerps += 2;
             }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                if (lerps + 2 < mapGenerator.WhiteTileNumber)
-                {
-                    startLerping(true);
-                    lerps += 2;
-                }
-            }
+            
         }
 
         if (canLerp)
@@ -67,12 +59,12 @@ public class Player : MonoBehaviour
             transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, LerpTime);
         }
     }
-    void startLerping(bool boost)
+    public void StartLerping()
     {
         timeStartedLerping = Time.time;
         Points++;
         UpdateUI();
-        if (boost)
+        if (lerps == 2)
         {
             endPossitionn.z += LerpDistance * 2;
         }
