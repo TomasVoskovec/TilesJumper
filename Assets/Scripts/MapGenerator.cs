@@ -19,7 +19,7 @@ public class MapGenerator : MonoBehaviour
     public float Acceleration = 0f;
     float spawningSpeed;
 
-    
+    public Color[] AvailableColors;
     void Start()
     {
         tileScale = Tiles[0].transform.localScale.x;
@@ -64,7 +64,8 @@ public class MapGenerator : MonoBehaviour
         if(isWhite)
         {
             tileWhiteZ -= 0.035f * tileScale;
-            Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+            GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+            gameobject.GetComponentInChildren<MeshRenderer>().material.color = AvailableColors[GetRandomColor()];
             WhiteTileNumber++;
         }
         else
@@ -76,5 +77,10 @@ public class MapGenerator : MonoBehaviour
             tileBlackZ -= 0.035f * tileScale;
             Instantiate(Tiles[tileNumber], new Vector3(0, 0, tileBlackZ), new Quaternion(0, 0, 0, 0));
         }
+    }
+    int GetRandomColor()
+    {
+        return Random.Range(0, AvailableColors.Length);
+        
     }
 }

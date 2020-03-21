@@ -28,6 +28,7 @@ public class TileCollision : MonoBehaviour
     public void MoveToNextTile()
     {
         player.lerps = 1;
+        //player.JumpDistance = 1;
         player.StartLerping();
     }
 }

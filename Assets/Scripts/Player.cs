@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     bool canLerpNext = false;
 
     public int lerps = 0;
-
+    public int JumpDistance;
     float timeStartedLerping;
 
     Vector3 startPossition;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         //Get map informations
-        
+        GetComponentInChildren<MeshRenderer>().material.color = Color.green;
         mapGenerator = Map.GetComponent<MapGenerator>();
         UpdateUI();
         canLerpNext = true;
@@ -41,15 +41,16 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down), Color.yellow);
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
         if (canLerpNext && Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             
             if (lerps + 2 < mapGenerator.WhiteTileNumber)
             {
-                StartLerping();
+                //StartLerping();
                 lerps += 2;
+                JumpDistance = 2;
             }
             
         }
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
         timeStartedLerping = Time.time;
         Points++;
         UpdateUI();
-        if (lerps == 2)
+        if (JumpDistance == 2)
         {
             endPossitionn.z += LerpDistance * 2;
         }
@@ -72,7 +73,7 @@ public class Player : MonoBehaviour
         {
             endPossitionn.z += LerpDistance;
         }
-
+        JumpDistance = 1;
         canLerp = true;
     }
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
@@ -112,7 +113,7 @@ public class Player : MonoBehaviour
             if (hit.collider.tag == "tile")
             {
                 print("hit Tile");
-                
+                gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
             }
         }
