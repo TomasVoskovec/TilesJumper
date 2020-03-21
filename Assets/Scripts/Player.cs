@@ -19,17 +19,21 @@ public class Player : MonoBehaviour
     public float LerpTime;
     public float LerpDistance;
 
-    public GameObject Map;
+    
     [Header("GamePlay")]
     public int Points;
     public GameObject Points_UI;
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
-
-    // Start is called before the first frame update
+    [Space]
+    [Header("Public references")]
+    public Menu Menu;
+    public GameObject Map;
+    private GameManager manager;
     void Start()
     {
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         //Get map informations
         GetComponentInChildren<MeshRenderer>().material.color = Color.green;
         mapGenerator = Map.GetComponent<MapGenerator>();
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
-        if (canLerpNext && Input.touchCount > 0)
+        if (canLerpNext && Input.touchCount > 0 && !manager.MainMenuActive)
         {
             Touch touch = Input.GetTouch(0);
             
@@ -62,19 +66,22 @@ public class Player : MonoBehaviour
     }
     public void StartLerping()
     {
-        timeStartedLerping = Time.time;
-        Points++;
-        UpdateUI();
-        if (JumpDistance == 2)
+        if (!manager.MainMenuActive)
         {
-            endPossitionn.z += LerpDistance * 2;
+            timeStartedLerping = Time.time;
+            Points++;
+            UpdateUI();
+            if (JumpDistance == 2)
+            {
+                endPossitionn.z += LerpDistance * 2;
+            }
+            else
+            {
+                endPossitionn.z += LerpDistance;
+            }
+            JumpDistance = 1;
+            canLerp = true;
         }
-        else
-        {
-            endPossitionn.z += LerpDistance;
-        }
-        JumpDistance = 1;
-        canLerp = true;
     }
     public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
     {
