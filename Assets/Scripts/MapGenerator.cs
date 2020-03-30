@@ -106,4 +106,5 @@ public class MapGenerator : MonoBehaviour
         int i = Random.Range(0, AvailableColors.Length);
         return AvailableColors[i];
     }
+
 }
