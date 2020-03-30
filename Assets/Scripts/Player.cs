@@ -8,13 +8,15 @@ public class Player : MonoBehaviour
     bool canLerpNext = false;
 
     public int lerps = 0;
-    public int JumpDistance;
+    public float JumpDistance;
+    public float Speed = 1;
     float timeStartedLerping;
 
     Vector3 startPossition;
     Vector3 endPossitionn;
 
     MapGenerator mapGenerator;
+    Animator jumpAnimator;
 
     public float LerpTime;
     public float LerpDistance;
@@ -23,46 +25,69 @@ public class Player : MonoBehaviour
     [Header("GamePlay")]
     public int Points;
     public GameObject Points_UI;
+
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
+
     [Space]
     [Header("Public references")]
     public Menu Menu;
     public GameObject Map;
     private GameManager manager;
+
     void Start()
     {
+        // Menu
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        //Get map informations
+
+        // Get map informations
         GetComponentInChildren<MeshRenderer>().material.color = Color.green;
         mapGenerator = Map.GetComponent<MapGenerator>();
+
+        // Set start color of player
+        gameObject.GetComponentInChildren<MeshRenderer>().material.color = mapGenerator.AvailableColors[0];
+
+        // Update score
         UpdateUI();
+
+        // Lerping props
         canLerpNext = true;
         startPossition = transform.position;
         endPossitionn = startPossition;
+
+        // Jump animation setup
+        jumpAnimator = GetComponentInChildren<Animator>();
+
     }
 
-    void Update()
+    private void FixedUpdate()
     {
+        jumpAnimator.SetFloat("JumpingTimeMultiplier", Speed);
+
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
+
         if (canLerpNext && Input.touchCount > 0 && !manager.MainMenuActive)
         {
             Touch touch = Input.GetTouch(0);
-            
+
             if (lerps + 2 < mapGenerator.WhiteTileNumber)
             {
-                //StartLerping();
                 lerps += 2;
                 JumpDistance = 2;
             }
-            
+
         }
 
         if (canLerp)
         {
             transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, LerpTime);
         }
+    }
+
+    void Update()
+    {
+        
     }
     public void StartLerping()
     {
@@ -120,7 +145,6 @@ public class Player : MonoBehaviour
             if (hit.collider.tag == "tile")
             {
                 print("hit Tile");
-                gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
             }
         }

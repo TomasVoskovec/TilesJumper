@@ -4,54 +4,66 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    public GameObject Player;
+    Player playerScript;
     public List<GameObject> Tiles = new List<GameObject>();
 
     // Tiles props
+    bool canChangeColor = false;
     int tileNumber = 0;
+    int generatedTiles = 0;
+    public int renderDistance = 10;
     public int WhiteTileNumber;
 
     float tileScale;
     float tileWhiteZ;
     float tileBlackZ;
 
-    // Speed props
-    public float StartSpawningSpeed = 1f;
-    public float Acceleration = 0f;
-    float spawningSpeed;
+    float WhiteSpawnStartTime;
 
+    Color currentColor;
     public Color[] AvailableColors;
+
     void Start()
     {
+        playerScript = Player.GetComponent<Player>();
+
+        currentColor = AvailableColors[0];
+
         tileScale = Tiles[0].transform.localScale.x;
 
         tileWhiteZ = 0.07f * tileScale;
         tileBlackZ = 0.0875f * tileScale;
-
-        spawningSpeed = StartSpawningSpeed;
-        StartCoroutine(generateMap());
     }
 
     
     void Update()
     {
-        
+        if (canGanarate())
+        {
+            generateTile();
+        }
     }
 
-    IEnumerator generateMap()
+    bool canGanarate()
     {
-        yield return new WaitForSeconds(0f);
-        while (true)
+        if (playerScript.Points + renderDistance <= WhiteTileNumber)
         {
-            if (tileNumber >= Tiles.Count)
-            {
-                tileNumber = 0;
-            }
-
-            spawnTile(isTileWhite(tileNumber));
-            tileNumber++;
-            spawningSpeed -= Acceleration;
-            yield return new WaitForSeconds(spawningSpeed);
+            return false;
         }
+
+        return true;
+    }
+
+    void generateTile()
+    {
+        if (tileNumber >= Tiles.Count)
+        {
+            tileNumber = 0;
+        }
+
+        spawnTile(isTileWhite(tileNumber));
+        tileNumber++;
     }
 
     bool isTileWhite(int num)
@@ -65,7 +77,18 @@ public class MapGenerator : MonoBehaviour
         {
             tileWhiteZ -= 0.035f * tileScale;
             GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
-            gameobject.GetComponentInChildren<MeshRenderer>().material.color = AvailableColors[GetRandomColor()];
+
+            if (canChangeColor)
+            {
+                gameobject.GetComponentInChildren<MeshRenderer>().material.color = GetRandomColor();
+                canChangeColor = false;
+            }
+            else
+            {
+                gameobject.GetComponentInChildren<MeshRenderer>().material.color = currentColor;
+                canChangeColor = true;
+            }
+
             WhiteTileNumber++;
         }
         else
@@ -78,9 +101,10 @@ public class MapGenerator : MonoBehaviour
             Instantiate(Tiles[tileNumber], new Vector3(0, 0, tileBlackZ), new Quaternion(0, 0, 0, 0));
         }
     }
-    int GetRandomColor()
+
+    Color GetRandomColor()
     {
-        return Random.Range(0, AvailableColors.Length);
-        
+        int i = Random.Range(0, AvailableColors.Length);
+        return AvailableColors[i];
     }
 }
