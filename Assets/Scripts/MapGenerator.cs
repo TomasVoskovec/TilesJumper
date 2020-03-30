@@ -11,7 +11,6 @@ public class MapGenerator : MonoBehaviour
     // Tiles props
     bool canChangeColor = false;
     int tileNumber = 0;
-    int generatedTiles = 0;
     public int renderDistance = 10;
     public int WhiteTileNumber;
 
