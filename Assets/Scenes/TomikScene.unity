@@ -410,7 +410,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.029031504, y: 0.96858186, z: -0.1366005, w: 0.20578323}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2625,7 +2625,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.029031504, y: 0.96858186, z: -0.1366005, w: 0.20578323}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3225,7 +3225,6 @@ MonoBehaviour:
   lerps: 0
   JumpDistance: 0
   Speed: 1
-  LerpTime: 0
   LerpDistance: 0
   Points: 0
   Points_UI: {fileID: 0}
@@ -5643,6 +5642,16 @@ PrefabInstance:
       propertyPath: Map
       value: 
       objectReference: {fileID: 1868997469}
+    - target: {fileID: 1118289668175716185, guid: ef6dfb945453a7944b0ac076c64c138f,
+        type: 3}
+      propertyPath: Speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1118289668175716185, guid: ef6dfb945453a7944b0ac076c64c138f,
+        type: 3}
+      propertyPath: LerpTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1118289668175716186, guid: ef6dfb945453a7944b0ac076c64c138f,
         type: 3}
       propertyPath: m_Name

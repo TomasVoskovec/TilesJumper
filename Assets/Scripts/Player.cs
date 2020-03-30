@@ -18,9 +18,7 @@ public class Player : MonoBehaviour
     MapGenerator mapGenerator;
     Animator jumpAnimator;
 
-    public float LerpTime;
     public float LerpDistance;
-
     
     [Header("GamePlay")]
     public int Points;
@@ -81,7 +79,7 @@ public class Player : MonoBehaviour
 
         if (canLerp)
         {
-            transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, LerpTime);
+            transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, Speed + Speed * 0.2f);
         }
     }
 
@@ -108,13 +106,13 @@ public class Player : MonoBehaviour
             canLerp = true;
         }
     }
-    public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime = 1)
+    public Vector3 Lerp(Vector3 start, Vector3 end, float timeStartedLerping, float lerpTime)
     {
         canLerpNext = false;
 
         float timeSinceStarted = Time.time - timeStartedLerping;
 
-        float percentageComplete = timeSinceStarted / lerpTime;
+        float percentageComplete = timeSinceStarted * lerpTime;
 
         Vector3 result = Vector3.Lerp(start, end, percentageComplete);
 
