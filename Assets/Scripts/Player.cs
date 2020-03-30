@@ -146,6 +146,9 @@ public class Player : MonoBehaviour
             {
                 print("hit Tile");
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
+            }else if (hit.collider.tag == "tile_generate")
+            {
+                // map generate code here ...
             }
         }
         
