@@ -17,11 +17,9 @@ public class TileDestroyer : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        print("trigger");
-        if (other.gameObject.tag == "tile")
-        {
-            print("tiles");
-            Destroy(other.gameObject);
-        }
+        
+        
+        Destroy(other.gameObject);
+        
     }
 }
