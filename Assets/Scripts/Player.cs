@@ -122,6 +122,9 @@ public class Player : MonoBehaviour
                 print("hit Tile");
                 gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
+            }else if (hit.collider.tag == "tile_generate")
+            {
+                // map generate code here ...
             }
         }
         
