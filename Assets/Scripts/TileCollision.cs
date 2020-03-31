@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class TileCollision : MonoBehaviour
 {
+    // Player props
     private Player player;
  
     void Start()
     {
+        // Get player script
         player = GetComponentInParent<Player>();
     }
 
-
-    void Update()
-    {
-        
-    }
-
+    // Generate smoke particle
     public void GenerateParticles()
     {
-        Instantiate(player.SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), player.SmokeParticle.transform.rotation);
+        player.GenerateParticles();
     }
+
+    // Starts push tile animation
     public void PushTile()
     {
         player.PushTile();
     }
+
+    // Starts lerping animation
     public void MoveToNextTile()
     {
-        player.lerps = 1;
-        //player.JumpDistance = 1;
+        player.Lerps = 1;
         player.StartLerping();
     }
 }

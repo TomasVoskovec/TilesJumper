@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    // Get players props and players script
     public GameObject Player;
     Player playerScript;
+
+    // Tiles game objects
     public List<GameObject> Tiles = new List<GameObject>();
 
     // Tiles props
@@ -18,8 +21,7 @@ public class MapGenerator : MonoBehaviour
     float tileWhiteZ;
     float tileBlackZ;
 
-    float WhiteSpawnStartTime;
-
+    // Colors of tiles
     Color currentColor;
     public Color[] AvailableColors;
 
@@ -38,12 +40,14 @@ public class MapGenerator : MonoBehaviour
     
     void Update()
     {
+        // Generate map
         if (canGanarate())
         {
             generateTile();
         }
     }
 
+    // Check if can generate depending on the render distance
     bool canGanarate()
     {
         if (playerScript.Points + renderDistance <= WhiteTileNumber)
@@ -54,6 +58,7 @@ public class MapGenerator : MonoBehaviour
         return true;
     }
 
+    // Generate tile function
     void generateTile()
     {
         if (tileNumber >= Tiles.Count)
@@ -65,11 +70,13 @@ public class MapGenerator : MonoBehaviour
         tileNumber++;
     }
 
+    // Check if tile is "white" (the bigger one / not the black one)
     bool isTileWhite(int num)
     {
         return !(num == 1 || num == 3 || num == 6 || num == 8 || num == 10);
     }
 
+    // Select tile from tiles list and set color of tile
     void spawnTile(bool isWhite = true)
     {
         if(isWhite)
@@ -101,6 +108,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    // Returns random color from own color list
     Color GetRandomColor()
     {
         int i = Random.Range(0, AvailableColors.Length);
