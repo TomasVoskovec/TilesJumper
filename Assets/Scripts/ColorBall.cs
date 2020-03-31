@@ -17,11 +17,13 @@ public class ColorBall : MonoBehaviour
 
     void changeColor()
     {
+
+        // Change color of the particles to the color of the colorball
         Color color = gameObject.GetComponent<MeshRenderer>().material.color;
 
         var main = particles.main;
         main.startColor = color;
-
+        // Change color of the light to the color of the colorball
         ballLight.color = color;
     }
 }

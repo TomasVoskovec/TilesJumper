@@ -24,9 +24,11 @@ public class Player : MonoBehaviour
     public float LerpDistance;
     public float JumpHeight;
     public float Speed = 1;
+    public bool End;
 
     [Space]
     [Header("GamePlay")]
+    public int HighScore;
     public int Points;
     public GameObject Points_UI;
 
@@ -67,10 +69,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Set speed of jumping animation
+        // Sets the speed of jumping animation
         jumpAnimator.SetFloat("JumpingTimeMultiplier", Speed);
 
-        // ???
+        // Draws a raycast line in front of the player in Unity Editor, not visible in game
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
 
         // Jump 2x farther if you click / tap on display
@@ -96,7 +98,7 @@ public class Player : MonoBehaviour
     // Starts the Lerping animation
     public void StartLerping()
     {
-        if (!manager.MainMenuActive)
+        if (!manager.MainMenuActive && !End)
         {
             timeStartedLerping = Time.time;
             Points++;
@@ -154,9 +156,18 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
+            // Get the tile below player with raycast
             if (hit.collider.tag == "tile")
             {
+                // Start the push animation on the tile below the player
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
+
+                if (hit.collider.gameObject.GetComponent<MeshRenderer>().material.color != gameObject.GetComponentInChildren<MeshRenderer>().material.color)
+                {
+                    End = true;
+                    GetComponentInChildren<Animator>().SetTrigger("End");
+                    manager.RestartGame();
+                }
             }
         }
     } 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TileDestroyer : MonoBehaviour
 {
-    // Destroy tiles if they are out of camera
+    // Destroy tiles behind the player
     private void OnTriggerEnter(Collider other)
     {
         Destroy(other.transform.parent.gameObject);

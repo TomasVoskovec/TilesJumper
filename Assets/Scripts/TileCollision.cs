@@ -28,7 +28,10 @@ public class TileCollision : MonoBehaviour
     // Starts lerping animation
     public void MoveToNextTile()
     {
-        player.Lerps = 1;
-        player.StartLerping();
+        if (!player.End)
+        {
+            player.Lerps = 1;
+            player.StartLerping();
+        }
     }
 }
