@@ -6,6 +6,7 @@ public class ColorBall : MonoBehaviour
 {
     private ParticleSystem particles;
     private Light ballLight;
+
     void Start()
     {
         
@@ -14,11 +15,6 @@ public class ColorBall : MonoBehaviour
         changeColor();
     }
 
-    
-    void Update()
-    {
-        
-    }
     void changeColor()
     {
         Color color = gameObject.GetComponent<MeshRenderer>().material.color;
