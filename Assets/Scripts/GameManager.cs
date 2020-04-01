@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        
         menu.ShowDeathMenu();
     }
 }

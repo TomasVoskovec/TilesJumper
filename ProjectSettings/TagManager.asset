@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - tile_generate
   - ColorBall
+  - ColorChanger
   layers:
   - Default
   - TransparentFX
