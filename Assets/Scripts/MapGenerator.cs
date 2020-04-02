@@ -24,6 +24,7 @@ public class MapGenerator : MonoBehaviour
     // Colors of tiles
     Color currentColor;
     public Color[] AvailableColors;
+    public GameObject ColorBall;
 
     void Start()
     {
@@ -84,9 +85,15 @@ public class MapGenerator : MonoBehaviour
             tileWhiteZ -= 0.035f * tileScale;
             GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
+            
+
             if (canChangeColor)
             {
                 gameobject.GetComponentInChildren<MeshRenderer>().material.color = GetRandomColor();
+                if (ColorBallGenerateChance() == 2)
+                {
+                    GenerateColorBall(gameobject);
+                }
                 canChangeColor = false;
             }
             else
@@ -113,6 +120,18 @@ public class MapGenerator : MonoBehaviour
     {
         int i = Random.Range(0, AvailableColors.Length);
         return AvailableColors[i];
+    }
+    int ColorBallGenerateChance()
+    {
+        int i = Random.Range(0, 5);
+        
+        return i;
+    }
+    private void GenerateColorBall(GameObject tile)
+    {
+        GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 1f, tile.transform.position.z), ColorBall.transform.rotation);
+        ball.GetComponent<MeshRenderer>().material.color = GetRandomColor();
+        ball.GetComponent<ColorBall>().ChangeColor();
     }
 
 }

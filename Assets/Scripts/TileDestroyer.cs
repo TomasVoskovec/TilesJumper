@@ -7,6 +7,12 @@ public class TileDestroyer : MonoBehaviour
     // Destroy tiles behind the player
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.transform.parent.gameObject);
+        if (other.transform.parent != null)
+        {
+            Destroy(other.transform.parent.gameObject);
+        }else
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public GameObject GameLogo;
@@ -23,6 +24,7 @@ public class Menu : MonoBehaviour
         GameLogo.GetComponent<Animator>().SetTrigger("move");
         StartButton.GetComponent<Animator>().SetTrigger("move");
         manager.MainMenuActive = false;
+        StartButton.GetComponent<Button>().interactable = false;
     }
     public void BackToMenu()
     {

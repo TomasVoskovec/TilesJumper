@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // Lerp props
     bool canLerp = false;
-    bool canLerpNext = false;
+    public bool canLerpNext = false;
     float timeStartedLerping;
 
     Vector3 startPossition;
@@ -25,12 +25,13 @@ public class Player : MonoBehaviour
     public float JumpHeight;
     public float Speed = 1;
     public bool End;
-
+    
     [Space]
     [Header("GamePlay")]
     public int HighScore;
     public int Points;
     public GameObject Points_UI;
+    public bool JumpBoost;
 
     [Space]
     [Header("Particles")]
@@ -66,27 +67,33 @@ public class Player : MonoBehaviour
         jumpAnimator = GetComponentInChildren<Animator>();
 
     }
+    private void Update()
+    {
+        // Jump 2x farther if you click / tap on display
+        if (!manager.MainMenuActive)
+        {
 
+            if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
+            {
+
+                Lerps += 2;
+                JumpHeight = 2;
+                JumpBoost = true;
+
+            }
+
+        }
+    }
     private void FixedUpdate()
     {
+        // Check if player has found colorball, using RayCast 
+        colorBallCheck();
         // Sets the speed of jumping animation
         jumpAnimator.SetFloat("JumpingTimeMultiplier", Speed);
 
         // Draws a raycast line in front of the player in Unity Editor, not visible in game
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward), Color.yellow);
 
-        // Jump 2x farther if you click / tap on display
-        if (canLerpNext && Input.touchCount > 0 && !manager.MainMenuActive)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (Lerps + 2 < mapGenerator.WhiteTileNumber)
-            {
-                Lerps += 2;
-                JumpHeight = 2;
-            }
-
-        }
 
         // Move player (only) forward
         if (canLerp)
@@ -103,7 +110,7 @@ public class Player : MonoBehaviour
             timeStartedLerping = Time.time;
             Points++;
             UpdateUI();
-            if (JumpHeight == 2)
+            if (JumpBoost)
             {
                 endPossitionn.z += LerpDistance * 2;
             }
@@ -112,6 +119,7 @@ public class Player : MonoBehaviour
                 endPossitionn.z += LerpDistance;
             }
             JumpHeight = 1;
+            JumpBoost = false;
             canLerp = true;
         }
     }
@@ -164,11 +172,27 @@ public class Player : MonoBehaviour
 
                 if (hit.collider.gameObject.GetComponent<MeshRenderer>().material.color != gameObject.GetComponentInChildren<MeshRenderer>().material.color)
                 {
-                    End = true;
-                    GetComponentInChildren<Animator>().SetTrigger("End");
-                    manager.RestartGame();
+                    if (!manager.Immortality)
+                    {
+                        End = true;
+                        GetComponentInChildren<Animator>().SetTrigger("End");
+                        manager.RestartGame();
+                    }
                 }
             }
         }
-    } 
+    }
+    private void colorBallCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
+        {
+            // If the object it hits has the tag "ColorBall"
+            if (hit.collider.tag == "ColorBall")
+            {
+                gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                Destroy(hit.collider.gameObject);
+            }
+        }
+    }
 }

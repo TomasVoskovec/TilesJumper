@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public bool MainMenuActive;
     public DeathMenu menu;
+    [Space]
+    [Header("Cheats")]
+    public bool Immortality;
     void Start()
     {
         MainMenuActive = true;

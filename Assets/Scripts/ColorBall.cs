@@ -11,11 +11,16 @@ public class ColorBall : MonoBehaviour
     {
         
         particles = GetComponentInChildren<ParticleSystem>();
-        ballLight = GetComponentInChildren<Light>();
-        changeColor();
+        //ballLight = GetComponentInChildren<Light>();
+        ChangeColor();
+    }
+    private void Awake()
+    {
+        particles = GetComponentInChildren<ParticleSystem>();
+        //ballLight = GetComponentInChildren<Light>();
     }
 
-    void changeColor()
+    public void ChangeColor()
     {
 
         // Change color of the particles to the color of the colorball
@@ -24,6 +29,6 @@ public class ColorBall : MonoBehaviour
         var main = particles.main;
         main.startColor = color;
         // Change color of the light to the color of the colorball
-        ballLight.color = color;
+        //ballLight.color = color;
     }
 }
