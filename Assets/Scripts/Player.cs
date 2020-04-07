@@ -108,15 +108,16 @@ public class Player : MonoBehaviour
         if (!manager.MainMenuActive && !End)
         {
             timeStartedLerping = Time.time;
-            Points++;
             UpdateUI();
             if (JumpBoost)
             {
                 endPossitionn.z += LerpDistance * 2;
+                Points += 2;
             }
             else
             {
                 endPossitionn.z += LerpDistance;
+                Points++;
             }
             JumpHeight = 1;
             JumpBoost = false;
