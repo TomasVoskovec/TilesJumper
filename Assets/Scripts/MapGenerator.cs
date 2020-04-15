@@ -22,15 +22,15 @@ public class MapGenerator : MonoBehaviour
     float tileBlackZ;
 
     // Colors of tiles
-    Color currentColor;
-    public Color[] AvailableColors;
+    public Color CurrentColor;
+    public List<Color> AvailableColors;
     public GameObject ColorBall;
 
     void Start()
     {
         playerScript = Player.GetComponent<Player>();
 
-        currentColor = AvailableColors[0];
+        CurrentColor = AvailableColors[0];
 
         tileScale = Tiles[0].transform.localScale.x;
 
@@ -85,20 +85,21 @@ public class MapGenerator : MonoBehaviour
             tileWhiteZ -= 0.035f * tileScale;
             GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
-            
-
             if (canChangeColor)
             {
-                gameobject.GetComponentInChildren<MeshRenderer>().material.color = GetRandomColor();
-                if (ColorBallGenerateChance() == 2)
+                if(percentageChance(0.5f))
                 {
-                    GenerateColorBall(gameobject);
+                    if (percentageChance(0.3f))
+                    {
+                        GenerateColorBall(gameobject);
+                    }
+                    gameobject.GetComponentInChildren<MeshRenderer>().material.color = otherRandomColor();
+                    canChangeColor = false;
                 }
-                canChangeColor = false;
             }
             else
             {
-                gameobject.GetComponentInChildren<MeshRenderer>().material.color = currentColor;
+                gameobject.GetComponentInChildren<MeshRenderer>().material.color = CurrentColor;
                 canChangeColor = true;
             }
 
@@ -115,23 +116,41 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    // Returns random color from own color list
-    Color GetRandomColor()
+    // Returns random color from custom color list
+    Color randomColor()
     {
-        int i = Random.Range(0, AvailableColors.Length);
+        int i = Random.Range(0, AvailableColors.Count);
         return AvailableColors[i];
     }
-    int ColorBallGenerateChance()
+
+    // Returns a random color from a custom color list except the current color
+    Color otherRandomColor()
     {
-        int i = Random.Range(0, 5);
-        
-        return i;
+        List<Color> colors = new List<Color>(AvailableColors);
+        colors.Remove(CurrentColor);
+
+        int i = Random.Range(0, colors.Count);
+        return colors[i];
+    }
+
+    // Returns true if generated (random) chance is equals or higher than required chance (1.0 = 100%)
+    bool percentageChance(float chance)
+    {
+        float requiredChance = 1f - chance;
+        float randomPercentage = Random.Range(0.0f, 1.0f);
+
+        return randomPercentage >= requiredChance;
     }
     private void GenerateColorBall(GameObject tile)
     {
         GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 1f, tile.transform.position.z), ColorBall.transform.rotation);
-        ball.GetComponent<MeshRenderer>().material.color = GetRandomColor();
+
+        Color ballColor = otherRandomColor();
+
+        ball.GetComponent<MeshRenderer>().material.color = ballColor;
         ball.GetComponent<ColorBall>().ChangeColor();
+
+        CurrentColor = ballColor;
     }
 
 }
