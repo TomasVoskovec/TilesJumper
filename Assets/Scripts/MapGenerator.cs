@@ -148,7 +148,7 @@ public class MapGenerator : MonoBehaviour
     }
     private void GenerateColorBall(GameObject tile)
     {
-        GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 1f, tile.transform.position.z), ColorBall.transform.rotation);
+        GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 0.5f, tile.transform.position.z), ColorBall.transform.rotation);
 
         Color ballColor = otherRandomColor();
 

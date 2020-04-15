@@ -416,7 +416,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1755,7 +1755,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2659,6 +2659,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3511904576526537238, guid: aa91a89d5eba2af44abe316cdedf5b16,
         type: 3}
+    - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
+        type: 3}
+      propertyPath: AvailableColors.Array.data[0].a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6212448915316695713, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
       propertyPath: m_LocalPosition.x
