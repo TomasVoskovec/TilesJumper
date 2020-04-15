@@ -96,6 +96,11 @@ public class MapGenerator : MonoBehaviour
                     gameobject.GetComponentInChildren<MeshRenderer>().material.color = otherRandomColor();
                     canChangeColor = false;
                 }
+                else
+                {
+                    gameobject.GetComponentInChildren<MeshRenderer>().material.color = CurrentColor;
+                    canChangeColor = true;
+                }
             }
             else
             {
