@@ -76,7 +76,7 @@ public class MapGenerator : MonoBehaviour
     {
         return !(num == 1 || num == 3 || num == 6 || num == 8 || num == 10);
     }
-
+    
     // Select tile from tiles list and set color of tile
     void spawnTile(bool isWhite = true)
     {
@@ -148,7 +148,7 @@ public class MapGenerator : MonoBehaviour
     }
     private void GenerateColorBall(GameObject tile)
     {
-        GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 0.5f, tile.transform.position.z), ColorBall.transform.rotation);
+        GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 0.5f, tile.transform.position.z - (0.035f * tileScale)), ColorBall.transform.rotation);
 
         Color ballColor = otherRandomColor();
 
