@@ -6,6 +6,7 @@ using UnityEngine;
 public class Skin 
 {
     public int ID;
+    public string Name;
     public Mesh SkinMesh;
     public bool Unlocked;
 }
