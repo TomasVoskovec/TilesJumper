@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
-
+    [Header("Skin")]
+    public int CurrentSkinID;
     [Space]
     [Header("Public references")]
     public Menu Menu;
