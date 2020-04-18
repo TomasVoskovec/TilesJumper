@@ -20,29 +20,42 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Animation")]
-    public int Lerps = 0;
     public float LerpDistance;
     public float JumpHeight;
-    public float Speed = 1;
-    public bool End;
     
     [Space]
-    [Header("GamePlay")]
+    [Header("Gameplay")]
+    public float StartSpeed = 1;
+    public float MaxSpeed = 2;
+    public float Acceleration = 0.001f;
+
+    [Space]
+    [Header("UI")]
     public int HighScore;
     public int Points;
     public GameObject Points_UI;
-    public bool JumpBoost;
 
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
+
+    [Space]
     [Header("Skin")]
     public int CurrentSkinID;
+
     [Space]
     [Header("Public references")]
     public Menu Menu;
     public GameObject Map;
     private GameManager manager;
+
+    [Space]
+    [Header("Developer tools")]
+    public bool End;
+    public bool CanAccelerate = true;
+    public bool JumpBoost;
+    public int Lerps = 0;
+    public float Speed;
 
     void Start()
     {
@@ -60,6 +73,7 @@ public class Player : MonoBehaviour
         UpdateUI();
 
         // Lerping props
+        Speed = StartSpeed;
         canLerpNext = true;
         startPossition = transform.position;
         endPossitionn = startPossition;
@@ -89,6 +103,7 @@ public class Player : MonoBehaviour
     {
         // Check if player has found colorball, using RayCast 
         colorBallCheck();
+
         // Sets the speed of jumping animation
         jumpAnimator.SetFloat("JumpingTimeMultiplier", Speed);
 
@@ -100,6 +115,8 @@ public class Player : MonoBehaviour
         if (canLerp)
         {
             transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, Speed + Speed * 0.2f);
+            
+            // Accelerate player
         }
     }
 

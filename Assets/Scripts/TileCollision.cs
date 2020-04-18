@@ -32,6 +32,16 @@ public class TileCollision : MonoBehaviour
         {
             player.Lerps = 1;
             player.StartLerping();
+            
+            // Accelerate player (animation speed)
+            if (player.CanAccelerate)
+            {
+                if (player.Speed < player.MaxSpeed)
+                {
+                    // a(player.Lerps) = player.StartSpeed * ((player.StatrtSpeed + player.Acceleration)^(player.Lerps - 1)
+                    player.Speed += player.Speed * player.Acceleration;
+                }
+            }
         }
     }
 }

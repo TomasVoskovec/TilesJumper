@@ -401,20 +401,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canLerpNext: 0
-  Lerps: 0
   LerpDistance: -0.7
   JumpHeight: 0
-  Speed: 1
-  End: 0
+  StartSpeed: 1
+  MaxSpeed: 2
+  Acceleration: 0.001
   HighScore: 0
   Points: 0
   Points_UI: {fileID: 1176712321}
-  JumpBoost: 0
   SmokeParticle: {fileID: 5485007472604990473, guid: 9fdf8839164c2744295845f72dbd8ea7,
     type: 3}
   CurrentSkinID: 0
   Menu: {fileID: 1584059136}
   Map: {fileID: 1868997469}
+  End: 0
+  CanAccelerate: 1
+  JumpBoost: 0
+  Lerps: 0
+  Speed: 1
 --- !u!4 &122658295
 Transform:
   m_ObjectHideFlags: 0
@@ -667,7 +671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3113,7 +3117,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
+  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -6247,20 +6251,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canLerpNext: 0
-  Lerps: 0
   LerpDistance: -0.7
   JumpHeight: 0
-  Speed: 1
-  End: 0
+  StartSpeed: 1
+  MaxSpeed: 2
+  Acceleration: 0.001
   HighScore: 0
   Points: 0
   Points_UI: {fileID: 1176712321}
-  JumpBoost: 0
   SmokeParticle: {fileID: 5485007472604990473, guid: 9fdf8839164c2744295845f72dbd8ea7,
     type: 3}
   CurrentSkinID: 0
   Menu: {fileID: 1584059136}
   Map: {fileID: 1868997469}
+  End: 0
+  CanAccelerate: 1
+  JumpBoost: 0
+  Lerps: 0
+  Speed: 0
 --- !u!4 &1118289667193976791
 Transform:
   m_ObjectHideFlags: 0
