@@ -7,6 +7,7 @@ public class Skin
 {
     public int ID;
     public string Name;
+    public Material SkinMaterial;
     public Mesh SkinMesh;
     public bool Unlocked;
 }

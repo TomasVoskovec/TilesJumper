@@ -7,6 +7,8 @@ public class Menu : MonoBehaviour
 {
     public GameObject GameLogo;
     public GameObject StartButton;
+    public GameObject SkinButton;
+    public GameObject ChallengeButton;
     private GameManager manager;
     void Start()
     {
@@ -25,6 +27,9 @@ public class Menu : MonoBehaviour
         StartButton.GetComponent<Animator>().SetTrigger("move");
         manager.MainMenuActive = false;
         StartButton.GetComponent<Button>().interactable = false;
+        ChallengeButton.GetComponent<Button>().interactable = false;
+        SkinButton.GetComponent<Button>().interactable = false;
+
     }
     public void BackToMenu()
     {

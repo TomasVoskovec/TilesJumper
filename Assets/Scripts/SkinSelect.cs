@@ -21,6 +21,7 @@ public class SkinSelect : MonoBehaviour
     public Button Previous;
     [Space]
     private Mesh currentPlayerMesh;
+    private Material currentPlayerMaterial;
 
     public int SelectedSkinID;
     public bool SkinSelectionActive;
@@ -108,6 +109,7 @@ public class SkinSelect : MonoBehaviour
         {
             
             currentPlayerMesh = player.GetComponentInChildren<MeshFilter>().mesh;
+            currentPlayerMaterial = player.GetComponentInChildren<MeshRenderer>().material;
             // Display skin name
             Name.text = Skins[SelectedSkinID].Name;
             player.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID].SkinMesh;
@@ -115,12 +117,14 @@ public class SkinSelect : MonoBehaviour
         else
         {
             player.GetComponentInChildren<MeshFilter>().mesh = currentPlayerMesh;
+            player.GetComponentInChildren<MeshRenderer>().material = currentPlayerMaterial;
         }
     }
     // Show next skin
     public void NextSkin()
     {
         player.gameObject.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID + 1].SkinMesh;
+        player.GetComponentInChildren<MeshRenderer>().material = Skins[SelectedSkinID + 1].SkinMaterial;
         SelectedSkinID++;
         skinCheck();
         Name.text = Skins[SelectedSkinID].Name;
@@ -129,6 +133,7 @@ public class SkinSelect : MonoBehaviour
     public void PreviousSkin()
     {
         player.gameObject.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID - 1].SkinMesh;
+        player.GetComponentInChildren<MeshRenderer>().material = Skins[SelectedSkinID - 1].SkinMaterial;
         SelectedSkinID--;
         skinCheck();
         Name.text = Skins[SelectedSkinID].Name;
@@ -138,6 +143,7 @@ public class SkinSelect : MonoBehaviour
     public void ActivateSkin()
     {
         currentPlayerMesh = Skins[SelectedSkinID].SkinMesh;
+        currentPlayerMaterial = Skins[SelectedSkinID].SkinMaterial;
         player.CurrentSkinID = SelectedSkinID;
         skinCheck();
     }
