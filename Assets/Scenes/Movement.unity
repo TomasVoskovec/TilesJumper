@@ -671,7 +671,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.02903151, y: 0.96858186, z: -0.13660051, w: 0.20578325}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3861,7 +3861,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.02903151, y: 0.96858186, z: -0.13660051, w: 0.20578325}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -6359,8 +6359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameLogo: {fileID: 694078817}
   StartButton: {fileID: 403339661}
-  SkinButton: {fileID: 0}
-  ChallengeButton: {fileID: 0}
+  SkinButton: {fileID: 279171767}
+  ChallengeButton: {fileID: 1220555360}
 --- !u!1 &1628906793
 GameObject:
   m_ObjectHideFlags: 0
