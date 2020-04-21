@@ -20,16 +20,16 @@ public class DeathMenu : MonoBehaviour
     {
         
     }
-    public void ShowDeathMenu()
+    public void ShowDeathMenu(bool isHighScore = false)
     {
         gameObject.GetComponent<Animator>().SetTrigger("move");
         CurrentScore_text.text = player.Points.ToString();
-        if (player.HighScore < player.Points)
+        if (isHighScore)
         {
-            player.HighScore = player.Points;
             BestScore_text.text = player.HighScore.ToString();
             HighScoreWarning.SetActive(true);
-        }else
+        }
+        else
         {
             BestScore_text.text = player.HighScore.ToString();
         }

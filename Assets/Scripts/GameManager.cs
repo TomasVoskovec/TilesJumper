@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
         
         GoldenTiles_UI.GetComponent<TextMeshProUGUI>().text = GoldenTiles.ToString();
     }
-    public void RestartGame()
+    public void RestartGame(bool isHighScore)
     {
-        menu.ShowDeathMenu();
+        menu.ShowDeathMenu(isHighScore);
     }
 
     public void Add(int add)

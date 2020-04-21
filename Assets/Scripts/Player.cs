@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Assets.Scripts.Models;
+
 public class Player : MonoBehaviour
 {
     // Lerp props
@@ -19,10 +21,17 @@ public class Player : MonoBehaviour
     Animator jumpAnimator;
 
     [Space]
+    [Header("GameData")]
+    public int GoldenTiles;
+    public int HighScore;
+    public int[] CompletedChallanges;
+    public int[] UnlockedSkins;
+
+    [Space]
     [Header("Animation")]
     public float LerpDistance;
     public float JumpHeight;
-    
+
     [Space]
     [Header("Gameplay")]
     public float StartSpeed = 1;
@@ -31,7 +40,6 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("UI")]
-    public int HighScore;
     public int Points;
     public GameObject Points_UI;
 
@@ -59,6 +67,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        //GameDataManager.Restore();
+        // Load saved player data
+        loadGameData();
+
         // Menu
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
@@ -193,15 +205,47 @@ public class Player : MonoBehaviour
                 {
                     if (!manager.Immortality)
                     {
-                        End = true;
-                        GetComponentInChildren<Animator>().SetTrigger("End");
-                        manager.RestartGame();
+                        endGame();
                     }
                 }
             }
         }
     }
-    private void colorBallCheck()
+
+    void endGame()
+    {
+        bool isHighScore = false;
+
+        // Chceck if is new high score
+        if (Points > HighScore)
+        {
+            HighScore = Points;
+            isHighScore = true;
+        }
+
+        // Save game data
+        GameDataManager.Save(this);
+
+        // Show end menu and restart game
+        End = true;
+        GetComponentInChildren<Animator>().SetTrigger("End");
+        manager.RestartGame(isHighScore);
+    }
+
+    void loadGameData()
+    {
+        GameData loadedData = GameDataManager.Load();
+
+        if(loadedData != null)
+        {
+            this.GoldenTiles = loadedData.GoldenTiles;
+            this.HighScore = loadedData.HighScore;
+            this.CompletedChallanges = loadedData.CompletedChallanges;
+            this.UnlockedSkins = loadedData.UnlockedSkins;
+        }
+    }
+
+    void colorBallCheck()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
