@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     [Header("Public references")]
     public Menu Menu;
     public GameObject Map;
-    private GameManager manager;
+    public GameManager Manager;
 
     [Space]
     [Header("Developer tools")]
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         loadGameData();
 
         // Menu
-        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        Manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
         // Get map informations
         GetComponentInChildren<MeshRenderer>().material.color = Color.green;
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // Jump 2x farther if you click / tap on display
-        if (!manager.MainMenuActive)
+        if (!Manager.MainMenuActive)
         {
 
             if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
@@ -129,15 +129,13 @@ public class Player : MonoBehaviour
         if (canLerp)
         {
             transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, Speed + Speed * 0.2f);
-            
-            // Accelerate player
         }
     }
 
     // Starts the Lerping animation
     public void StartLerping()
     {
-        if (!manager.MainMenuActive && !End)
+        if (!Manager.MainMenuActive && !End)
         {
             timeStartedLerping = Time.time;
             UpdateUI();
@@ -207,9 +205,9 @@ public class Player : MonoBehaviour
 
                 if (hit.collider.gameObject.GetComponent<MeshRenderer>().material.color != gameObject.GetComponentInChildren<MeshRenderer>().material.color)
                 {
-                    if (!manager.Immortality)
+                    if (!Manager.Immortality)
                     {
-                        if (!manager.MainMenuActive)
+                        if (!Manager.MainMenuActive)
                         {
                             endGame();
                         }else
@@ -233,13 +231,15 @@ public class Player : MonoBehaviour
             isHighScore = true;
         }
 
+        updatePlayerData();
+
         // Save game data
         GameDataManager.Save(this);
 
         // Show end menu and restart game
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
-        manager.RestartGame(isHighScore);
+        Manager.RestartGame(isHighScore);
     }
 
     void updatePlayerData()
@@ -257,6 +257,7 @@ public class Player : MonoBehaviour
             this.HighScore = loadedData.HighScore;
             this.CompletedChallanges = loadedData.CompletedChallanges;
             this.UnlockedSkins = loadedData.UnlockedSkins;
+            this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
         }
     }
 

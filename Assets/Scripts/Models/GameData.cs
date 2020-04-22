@@ -19,15 +19,16 @@ namespace Assets.Scripts.Models
         {
             this.HighScore = player.HighScore;
             this.GoldenTiles = player.GoldenTiles;
+            this.OverallJumpBoosts = player.OverallJumpBoosts;
             this.CompletedChallanges = player.CompletedChallanges;
             this.UnlockedSkins = player.UnlockedSkins;
-            this.OverallJumpBoosts = player.OverallJumpBoosts;
         }
 
         public GameData()
         {
             this.HighScore = 0;
             this.GoldenTiles = 0;
+            this.OverallJumpBoosts = 0;
             this.CompletedChallanges = new int[0];
             this.UnlockedSkins = new int[0];
         }
