@@ -58,12 +58,13 @@ public class Player : MonoBehaviour
     public Menu Menu;
     public GameObject Map;
     public GameManager Manager;
-
+    public ChallengeManager ChallengeManager;
     [Space]
     [Header("Developer tools")]
     public bool End;
     public bool CanAccelerate = true;
     public bool JumpBoost;
+    public int JumpBoostsinARow;
     public int Lerps = 0;
     public float Speed;
 
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour
                 Lerps += 2;
                 JumpHeight = 2;
                 JumpBoost = true;
-
+                
             }
 
         }
@@ -144,11 +145,15 @@ public class Player : MonoBehaviour
                 endPossitionn.z += LerpDistance * 2;
                 Points += 2;
                 JumpBoosts++;
+                JumpBoostsinARow++;
+                ChallengeManager.ProgressChallenge(0);
             }
             else
             {
                 endPossitionn.z += LerpDistance;
                 Points++;
+                ChallengeManager.ResetChallengeProgress(0);
+                JumpBoostsinARow = 0;
             }
             JumpHeight = 1;
             JumpBoost = false;

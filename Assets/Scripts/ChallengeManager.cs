@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class ChallengeManager : MonoBehaviour
 {
 
@@ -12,6 +13,12 @@ public class ChallengeManager : MonoBehaviour
     [Space]
     public GameObject Challenge_prefab;
     public GameObject Content_parent;
+    [Space]
+    [Header("PopUp")]
+    public GameObject PopUp;
+    public TextMeshProUGUI PopUp_name;
+    public Image PopUp_bar;
+    public TextMeshProUGUI PopUp_progress;
 
     private Player player;
     void Start()
@@ -27,15 +34,46 @@ public class ChallengeManager : MonoBehaviour
 
     public void ProgressChallenge(int GroupID)
     {
-        foreach(Challenge challenge in Challenges)
+        StartCoroutine(Progress(GroupID));
+    }
+
+    IEnumerator Progress(int GroupID)
+    {
+        foreach (Challenge challenge in Challenges)
         {
             if (challenge.GroupID == GroupID)
             {
-                challenge.Progress++;
+                if (challenge.Progress != challenge.Goal)
+                {
+
+                    challenge.Progress++;
+                    PopUp_name.text = challenge.Name;
+                    PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
+                    PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
+                    PopUp.GetComponent<Animator>().SetTrigger("show");
+                    yield return new WaitForSeconds(1);
+                    PopUp.GetComponent<Animator>().SetTrigger("hide");
+                }
+
             }
         }
     }
+    public void ResetChallengeProgress(int GroupID)
+    {
+        foreach (Challenge challenge in Challenges)
+        {
+            if (challenge.GroupID == GroupID)
+            {
+                if (challenge.Progress != challenge.Goal)
+                {
 
+                    challenge.Progress = 0;
+                    StopAllCoroutines();
+                }
+
+            }
+        }
+    }
     public void ShowChallenge(bool enable)
     {
         Challenge_UI.SetActive(enable);
