@@ -23,6 +23,7 @@ public class ChallengeManager : MonoBehaviour
 
     private Player player;
 
+    private bool PopInProgress;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -47,14 +48,18 @@ public class ChallengeManager : MonoBehaviour
             {
                 if (challenge.Progress != challenge.Goal)
                 {
-
-                    challenge.Progress++;
-                    PopUp_name.text = challenge.Name;
-                    PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
-                    PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
-                    PopUp.GetComponent<Animator>().SetTrigger("show");
-                    yield return new WaitForSeconds(1);
-                    PopUp.GetComponent<Animator>().SetTrigger("hide");
+                    if (!PopInProgress)
+                    {
+                        PopInProgress = true;
+                        challenge.Progress++;
+                        PopUp_name.text = challenge.Name;
+                        PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
+                        PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
+                        PopUp.GetComponent<Animator>().SetTrigger("show");
+                        yield return new WaitForSeconds(1);
+                        PopInProgress = false;
+                        PopUp.GetComponent<Animator>().SetTrigger("hide");
+                    }
                 }
 
             }
@@ -70,6 +75,7 @@ public class ChallengeManager : MonoBehaviour
                 {
 
                     challenge.Progress = 0;
+                    PopInProgress = false;
                     StopAllCoroutines();
                 }
 
