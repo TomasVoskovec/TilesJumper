@@ -101,6 +101,8 @@ public class Player : MonoBehaviour
         // Jump animation setup
         jumpAnimator = GetComponentInChildren<Animator>();
 
+        // Load UI values
+        Manager.LoadValues();
     }
     private void Update()
     {

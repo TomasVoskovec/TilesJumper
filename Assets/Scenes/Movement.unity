@@ -4995,7 +4995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenuActive: 0
   menu: {fileID: 1577939318}
-  GoldenTiles: 50
+  GoldenTiles: 0
   GoldenTiles_UI: {fileID: 2138298767}
   Immortality: 0
 --- !u!4 &1116723711

@@ -178,7 +178,7 @@ public class ChallengeManager : MonoBehaviour
                 {
                     GameManager manager = GetComponent<GameManager>();
                     //manager.GoldenTiles += challenge.Reward;
-                    manager.Add(challenge.Reward);
+                    manager.AddGoldenTiles(challenge.Reward);
                     challenge.Completed = true;
 
                     player.CompletedChallanges.Add(ChallengeID);
