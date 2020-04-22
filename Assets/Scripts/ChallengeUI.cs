@@ -22,15 +22,37 @@ public class ChallengeUI : MonoBehaviour
     private Player player;
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         if (Challenge.Completed)
         {
             Claim_button.gameObject.SetActive(false);
             Completed.SetActive(true);
-        }else
+        }
+        else
         {
             if (Challenge.Progress == Challenge.Goal)
             {
-                Claim_button.interactable = true;
+                bool isCollected = false;
+                if (player.CompletedChallanges != null && player.CompletedChallanges.Count > 0)
+                {
+                    foreach (int compleatedChallenge in player.CompletedChallanges)
+                    {
+                        if (compleatedChallenge == Challenge.ID)
+                        {
+                            isCollected = true;
+                        }
+                    }
+                }
+                if (isCollected)
+                {
+                    Claim_button.gameObject.SetActive(false);
+                    Completed.SetActive(true);
+                }
+                else
+                {
+                    Claim_button.interactable = true;
+                }
             }
             else
             {

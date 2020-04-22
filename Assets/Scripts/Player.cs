@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
     public int HighScore;
     public int JumpBoosts;
     public int OverallJumpBoosts;
-    public int[] CompletedChallanges;
-    public int[] UnlockedSkins;
+    public List<int> CompletedChallanges;
+    public List<int> UnlockedSkins;
 
     [Space]
     [Header("Animation")]
@@ -64,12 +64,17 @@ public class Player : MonoBehaviour
     public bool End;
     public bool CanAccelerate = true;
     public bool JumpBoost;
+    public bool RestoreData = false;
     public int Lerps = 0;
     public float Speed;
 
     void Start()
     {
-        //GameDataManager.Restore();
+        if (RestoreData)
+        {
+            GameDataManager.Restore();
+        }
+
         // Load saved player data
         loadGameData();
 
@@ -255,9 +260,9 @@ public class Player : MonoBehaviour
         {
             this.GoldenTiles = loadedData.GoldenTiles;
             this.HighScore = loadedData.HighScore;
-            this.CompletedChallanges = loadedData.CompletedChallanges;
-            this.UnlockedSkins = loadedData.UnlockedSkins;
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
+            this.CompletedChallanges = new List<int>(loadedData.CompletedChallanges);
+            this.UnlockedSkins = new List<int>(loadedData.CompletedChallanges);
         }
     }
 

@@ -20,8 +20,8 @@ namespace Assets.Scripts.Models
             this.HighScore = player.HighScore;
             this.GoldenTiles = player.GoldenTiles;
             this.OverallJumpBoosts = player.OverallJumpBoosts;
-            this.CompletedChallanges = player.CompletedChallanges;
-            this.UnlockedSkins = player.UnlockedSkins;
+            this.CompletedChallanges = player.CompletedChallanges.ToArray();
+            this.UnlockedSkins = player.UnlockedSkins.ToArray();
         }
 
         public GameData()

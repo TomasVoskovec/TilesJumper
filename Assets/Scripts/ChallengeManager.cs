@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Models;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class ChallengeManager : MonoBehaviour
     public GameObject Content_parent;
 
     private Player player;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -44,7 +46,8 @@ public class ChallengeManager : MonoBehaviour
         if (enable)
         {
             LoadChallenges();
-        }else
+        }
+        else
         {
             foreach (Transform child in Content_parent.transform)
             {
@@ -77,13 +80,16 @@ public class ChallengeManager : MonoBehaviour
         if (id == 1)
         {
             return "EASY";
-        }else if (id == 2)
+        }
+        else if (id == 2)
         {
             return "MEDIUM";
-        }else if (id == 3)
+        }
+        else if (id == 3)
         {
             return "HARD";
-        }else
+        }
+        else
         {
             return null;
         }
@@ -110,14 +116,30 @@ public class ChallengeManager : MonoBehaviour
     }
     public void CompleteChallenge(int ChallengeID)
     {
-        foreach(Challenge challenge in Challenges)
+        foreach (Challenge challenge in Challenges)
         {
             if (challenge.ID == ChallengeID)
             {
-                GameManager manager = GetComponent<GameManager>();
-                //manager.GoldenTiles += challenge.Reward;
-                manager.Add(challenge.Reward);
-                challenge.Completed = true;
+                bool isChallengeCompleated = false;
+
+                foreach(int compleatedChallenge in player.CompletedChallanges)
+                {
+                    if (ChallengeID == compleatedChallenge)
+                    {
+                        isChallengeCompleated = true;
+                    }
+                }
+
+                if (!isChallengeCompleated)
+                {
+                    GameManager manager = GetComponent<GameManager>();
+                    //manager.GoldenTiles += challenge.Reward;
+                    manager.Add(challenge.Reward);
+                    challenge.Completed = true;
+
+                    player.CompletedChallanges.Add(ChallengeID);
+                    GameDataManager.Save(player);
+                }
             }
         }
     }
