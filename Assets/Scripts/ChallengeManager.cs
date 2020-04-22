@@ -50,15 +50,19 @@ public class ChallengeManager : MonoBehaviour
                 {
                     if (!PopInProgress)
                     {
-                        PopInProgress = true;
                         challenge.Progress++;
-                        PopUp_name.text = challenge.Name;
-                        PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
-                        PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
-                        PopUp.GetComponent<Animator>().SetTrigger("show");
-                        yield return new WaitForSeconds(1);
-                        PopInProgress = false;
-                        PopUp.GetComponent<Animator>().SetTrigger("hide");
+                        if (challenge.Progress == challenge.Goal)
+                        {
+                            PopInProgress = true;
+
+                            PopUp_name.text = challenge.Name;
+                            PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
+                            PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
+                            PopUp.GetComponent<Animator>().SetTrigger("show");
+                            yield return new WaitForSeconds(1);
+                            PopInProgress = false;
+                            PopUp.GetComponent<Animator>().SetTrigger("hide");
+                        }
                     }
                 }
 
