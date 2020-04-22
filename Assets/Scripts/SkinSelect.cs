@@ -170,6 +170,7 @@ public class SkinSelect : MonoBehaviour
         {
             
             Skins[SelectedSkinID].Unlocked = true;
+            LockImage.GetComponent<Animator>().SetTrigger("fade");
             skinCheck();
             manager.Remove(Skins[SelectedSkinID].Price);
         }
