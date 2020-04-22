@@ -5048,6 +5048,10 @@ MonoBehaviour:
   Challenge_prefab: {fileID: 6130216183953049647, guid: 50cc727b57d86b2408a83a52e0771709,
     type: 3}
   Content_parent: {fileID: 1090064400}
+  PopUp: {fileID: 2065735480}
+  PopUp_name: {fileID: 233532167}
+  PopUp_bar: {fileID: 459368342}
+  PopUp_progress: {fileID: 538936326}
 --- !u!1 &1135852194
 GameObject:
   m_ObjectHideFlags: 0
@@ -9397,9 +9401,12 @@ MonoBehaviour:
   CurrentSkinID: 0
   Menu: {fileID: 1584059136}
   Map: {fileID: 1868997469}
+  Manager: {fileID: 0}
+  ChallengeManager: {fileID: 1116723712}
   End: 0
   CanAccelerate: 1
   JumpBoost: 0
+  JumpBoostsinARow: 0
   Lerps: 0
   Speed: 0
 --- !u!4 &1118289667193976791
