@@ -196,6 +196,7 @@ public class Player : MonoBehaviour
     public void PushTile()
     {
         RaycastHit hit;
+        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
             // Get the tile below player with raycast
@@ -208,7 +209,13 @@ public class Player : MonoBehaviour
                 {
                     if (!manager.Immortality)
                     {
-                        endGame();
+                        if (!manager.MainMenuActive)
+                        {
+                            endGame();
+                        }else
+                        {
+                            gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                        }
                     }
                 }
             }

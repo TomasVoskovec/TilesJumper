@@ -15,25 +15,28 @@ public class SkinSelect : MonoBehaviour
     public GameObject Points_UI;
     public GameObject LockImage;
     public TextMeshProUGUI Name;
+    public GameObject PriceGameobject;
+    public TextMeshProUGUI Price_text;
     public GameObject ActivatedSkinImage;
     public Button Next;
     public Button Activate;
+    public Button Buy;
     public Button Previous;
     [Space]
     private Mesh currentPlayerMesh;
     private Material currentPlayerMaterial;
-
+    private GameManager manager;
     public int SelectedSkinID;
     public bool SkinSelectionActive;
     public Skin[] Skins;
-    // Start is called before the first frame update
+    
 
     void Start()
     {
-        
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -70,7 +73,8 @@ public class SkinSelect : MonoBehaviour
             // If the skin is unlocked enable light and disable the "lock" image
             ShowLight.SetActive(true);
             LockImage.SetActive(false);
-            
+            PriceGameobject.SetActive(false);
+
             // If the selected skin is the current active skin show image
             if (SelectedSkinID == player.CurrentSkinID)
             {
@@ -78,6 +82,7 @@ public class SkinSelect : MonoBehaviour
                 ActivatedSkinImage.SetActive(true);
             }else
             {
+                Activate.gameObject.SetActive(true);
                 Activate.interactable = true;
                 ActivatedSkinImage.SetActive(false);
             }
@@ -86,8 +91,20 @@ public class SkinSelect : MonoBehaviour
              // If the selected skin is not unlocked, disable light and show "lock" image
             ActivatedSkinImage.SetActive(false);
             LockImage.SetActive(true);
+            PriceGameobject.SetActive(true);
+            Price_text.text = Skins[SelectedSkinID].Price.ToString();
+            if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
+            {
+                Buy.interactable = true;
+
+            }else
+            {
+                Buy.interactable = false;
+            }
             ShowLight.SetActive(false);
-            Activate.interactable = false;
+
+            Activate.gameObject.SetActive(false);
+            
         }
     }
     // Transition in or out of skin selection
@@ -146,6 +163,17 @@ public class SkinSelect : MonoBehaviour
         currentPlayerMaterial = Skins[SelectedSkinID].SkinMaterial;
         player.CurrentSkinID = SelectedSkinID;
         skinCheck();
+    }
+    public void BuySkin()
+    {
+        if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
+        {
+            manager.GoldenTiles -= Skins[SelectedSkinID].Price;
+            Skins[SelectedSkinID].Unlocked = true;
+            skinCheck();
+        }
+
+        
     }
 
 

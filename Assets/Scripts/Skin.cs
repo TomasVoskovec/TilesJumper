@@ -9,5 +9,6 @@ public class Skin
     public string Name;
     public Material SkinMaterial;
     public Mesh SkinMesh;
+    public int Price;
     public bool Unlocked;
 }
