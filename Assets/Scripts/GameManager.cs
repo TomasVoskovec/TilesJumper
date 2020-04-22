@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Assets.Scripts.Models;
+
 public class GameManager : MonoBehaviour
 {
     public bool MainMenuActive;
@@ -15,9 +17,13 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Cheats")]
     public bool Immortality;
+
+    Player player;
+
     void Start()
     {
         MainMenuActive = true;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         UpdateValues();
     }
 
@@ -29,19 +35,26 @@ public class GameManager : MonoBehaviour
 
     public void UpdateValues()
     {
-        
         GoldenTiles_UI.GetComponent<TextMeshProUGUI>().text = GoldenTiles.ToString();
     }
+
+    public void LoadValues()
+    {
+        GoldenTiles_UI.GetComponent<TextMeshProUGUI>().text = player.GoldenTiles.ToString();
+    }
+
     public void RestartGame(bool isHighScore)
     {
         menu.ShowDeathMenu(isHighScore);
     }
 
-    public void Add(int add)
+    public void AddGoldenTiles(int value)
     {
+        player.GoldenTiles += value;
+        GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
-        StartCoroutine(AddGoldenTiles(add));
+        StartCoroutine(AddGoldenTilesAnim(value));
     }
     public void Remove(int remove)
     {
@@ -49,18 +62,20 @@ public class GameManager : MonoBehaviour
         //StopAllCoroutines();
         StartCoroutine(RemoveGoldenTiles(remove));
     }
-    IEnumerator AddGoldenTiles(int Value)
+    IEnumerator AddGoldenTilesAnim(int value)
     {
         int i = 0;
-        while(i < Value)
+        while(i < value)
         {
             GoldenTiles++;
             i++;
             UpdateValues();
             yield return new WaitForSeconds(0.01f);
         }
-        if (i == Value)
+        if (i == value)
         {
+            GoldenTiles = player.GoldenTiles;
+            UpdateValues();
             GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
 
