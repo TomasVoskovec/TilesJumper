@@ -11,6 +11,7 @@ namespace Assets.Scripts.Models
     {
         public int HighScore { get; set; }
         public int GoldenTiles { get; set; }
+        public int OverallJumpBoosts { get; set; }
         public int[] CompletedChallanges { get; set; }
         public int[] UnlockedSkins { get; set; }
 
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Models
             this.GoldenTiles = player.GoldenTiles;
             this.CompletedChallanges = player.CompletedChallanges;
             this.UnlockedSkins = player.UnlockedSkins;
+            this.OverallJumpBoosts = player.OverallJumpBoosts;
         }
 
         public GameData()

@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     [Header("GameData")]
     public int GoldenTiles;
     public int HighScore;
+    public int JumpBoosts;
+    public int OverallJumpBoosts;
     public int[] CompletedChallanges;
     public int[] UnlockedSkins;
 
@@ -143,6 +145,7 @@ public class Player : MonoBehaviour
             {
                 endPossitionn.z += LerpDistance * 2;
                 Points += 2;
+                JumpBoosts++;
             }
             else
             {
@@ -230,6 +233,11 @@ public class Player : MonoBehaviour
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
         manager.RestartGame(isHighScore);
+    }
+
+    void updatePlayerData()
+    {
+        OverallJumpBoosts += JumpBoosts;
     }
 
     void loadGameData()
