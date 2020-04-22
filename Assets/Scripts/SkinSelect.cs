@@ -168,9 +168,10 @@ public class SkinSelect : MonoBehaviour
     {
         if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
         {
-            manager.GoldenTiles -= Skins[SelectedSkinID].Price;
+            
             Skins[SelectedSkinID].Unlocked = true;
             skinCheck();
+            manager.Remove(Skins[SelectedSkinID].Price);
         }
 
         
