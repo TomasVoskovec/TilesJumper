@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
         //StopAllCoroutines();
         StartCoroutine(AddGoldenTiles(add));
     }
+    public void Remove(int remove)
+    {
+        GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
+        //StopAllCoroutines();
+        StartCoroutine(RemoveGoldenTiles(remove));
+    }
     IEnumerator AddGoldenTiles(int Value)
     {
         int i = 0;
@@ -50,6 +56,22 @@ public class GameManager : MonoBehaviour
         {
             GoldenTiles++;
             i++;
+            UpdateValues();
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (i == Value)
+        {
+            GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
+        }
+
+    }
+    IEnumerator RemoveGoldenTiles(int Value)
+    {
+        int i = Value;
+        while (i > 0)
+        {
+            GoldenTiles--;
+            i--;
             UpdateValues();
             yield return new WaitForSeconds(0.01f);
         }

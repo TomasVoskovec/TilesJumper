@@ -12,15 +12,28 @@ public class ChallengeManager : MonoBehaviour
     [Space]
     public GameObject Challenge_prefab;
     public GameObject Content_parent;
+
+    private Player player;
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
    
     void Update()
     {
         
+    }
+
+    public void ProgressChallenge(int GroupID)
+    {
+        foreach(Challenge challenge in Challenges)
+        {
+            if (challenge.GroupID == GroupID)
+            {
+                challenge.Progress++;
+            }
+        }
     }
 
     public void ShowChallenge(bool enable)
