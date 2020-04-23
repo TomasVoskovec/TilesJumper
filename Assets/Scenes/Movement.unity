@@ -14297,6 +14297,7 @@ MonoBehaviour:
   Menu: {fileID: 1584059136}
   Map: {fileID: 1868997469}
   Manager: {fileID: 1116723710}
+  SkinManager: {fileID: 314061793}
   ChallengeManager: {fileID: 1116723712}
   End: 0
   CanAccelerate: 1
