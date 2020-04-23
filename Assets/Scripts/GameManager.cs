@@ -31,6 +31,12 @@ public class GameManager : MonoBehaviour
         MainMenuActive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         UpdateValues();
+        loadData();
+    }
+
+    void loadData()
+    {
+        GoldenTiles = player.GoldenTiles;
     }
 
     
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void AddGoldenTiles(int value)
     {
         player.GoldenTiles += value;
+        GoldenTiles = player.GoldenTiles;
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
@@ -65,6 +72,7 @@ public class GameManager : MonoBehaviour
     public void Remove(int value)
     {
         player.GoldenTiles -= value;
+        GoldenTiles = player.GoldenTiles;
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
@@ -88,9 +96,9 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    IEnumerator RemoveGoldenTiles(int Value)
+    IEnumerator RemoveGoldenTiles(int value)
     {
-        int i = Value;
+        int i = value;
         while (i > 0)
         {
             GoldenTiles--;
@@ -98,8 +106,10 @@ public class GameManager : MonoBehaviour
             UpdateValues();
             yield return new WaitForSeconds(0.01f);
         }
-        if (i == Value)
+        if (i == value)
         {
+            GoldenTiles = player.GoldenTiles;
+            UpdateValues();
             GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
 

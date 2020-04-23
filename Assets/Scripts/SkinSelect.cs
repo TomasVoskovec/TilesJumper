@@ -82,13 +82,15 @@ public class SkinSelect : MonoBehaviour
             {
                 Activate.interactable = false;
                 ActivatedSkinImage.SetActive(true);
-            }else
+            }
+            else
             {
                 Activate.gameObject.SetActive(true);
                 Activate.interactable = true;
                 ActivatedSkinImage.SetActive(false);
             }
-        }else
+        }
+        else
         {
              // If the selected skin is not unlocked, disable light and show "lock" image
             ActivatedSkinImage.SetActive(false);

@@ -10,5 +10,4 @@ public class Skin
     public Material SkinMaterial;
     public Mesh SkinMesh;
     public int Price;
-    public bool Unlocked;
 }
