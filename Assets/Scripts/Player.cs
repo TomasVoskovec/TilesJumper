@@ -259,7 +259,7 @@ public class Player : MonoBehaviour
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
         Manager.GameMusic.Stop();
-
+        Manager.EndMusic.Play();
         // Save game data
         GameDataManager.Save(this);
         // Restart game

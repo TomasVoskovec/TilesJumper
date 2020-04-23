@@ -28,13 +28,13 @@ public class Menu : MonoBehaviour
     {
         // Move menu out of screen with animation
         GameLogo.GetComponent<Animator>().SetTrigger("move");
-        StartButton.GetComponent<Animator>().SetTrigger("move");
-        manager.MainMenuActive = false;
+        StartButton.GetComponent<Animator>().SetTrigger("move"); 
         StartButton.GetComponent<Button>().interactable = false;
         ChallengeButton.GetComponent<Button>().interactable = false;
         SkinButton.GetComponent<Button>().interactable = false;
         manager.MenuMusic.Stop();
         manager.GameMusic.Play();
+        manager.MainMenuActive = false;
 
     }
     
