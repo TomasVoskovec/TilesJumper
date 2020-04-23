@@ -95,7 +95,7 @@ public class SkinSelect : MonoBehaviour
             LockImage.SetActive(true);
             PriceGameobject.SetActive(true);
             Price_text.text = Skins[SelectedSkinID].Price.ToString();
-            if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
+            if (player.GoldenTiles >= Skins[SelectedSkinID].Price)
             {
                 Buy.interactable = true;
 
@@ -170,7 +170,7 @@ public class SkinSelect : MonoBehaviour
     }
     public void BuySkin()
     {
-        if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
+        if (player.GoldenTiles >= Skins[SelectedSkinID].Price)
         {
             Skin skin = Skins[SelectedSkinID];
 
