@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Cheats")]
     public bool Immortality;
+    [Space]
+    [Header("Audio")]
+    public AudioSource GameMusic;
+    public AudioSource MenuMusic;
 
     Player player;
 

@@ -251,6 +251,7 @@ public class Player : MonoBehaviour
         // Show end menu and restart game
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
+        Manager.GameMusic.Stop();
         Manager.RestartGame(isHighScore);
     }
 

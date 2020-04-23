@@ -10,9 +10,13 @@ public class Menu : MonoBehaviour
     public GameObject SkinButton;
     public GameObject ChallengeButton;
     private GameManager manager;
+
+    
+    
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        manager.MenuMusic.Play();
     }
 
     
@@ -29,8 +33,11 @@ public class Menu : MonoBehaviour
         StartButton.GetComponent<Button>().interactable = false;
         ChallengeButton.GetComponent<Button>().interactable = false;
         SkinButton.GetComponent<Button>().interactable = false;
+        manager.MenuMusic.Stop();
+        manager.GameMusic.Play();
 
     }
+    
     public void BackToMenu()
     {
         // Show mainmenu
