@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public int OverallJumpBoosts;
     public List<int> CompletedChallanges;
     public List<int> UnlockedSkins;
+    public List<Challenge> ChallengeProgress;
 
     [Space]
     [Header("Animation")]
@@ -222,7 +223,8 @@ public class Player : MonoBehaviour
                         if (!Manager.MainMenuActive)
                         {
                             endGame();
-                        }else
+                        }
+                        else
                         {
                             gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                         }
@@ -245,19 +247,37 @@ public class Player : MonoBehaviour
 
         updatePlayerData();
 
-        // Save game data
-        GameDataManager.Save(this);
-
         // Show end menu and restart game
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
         Manager.GameMusic.Stop();
+
+        // Save game data
+        GameDataManager.Save(this);
+        // Restart game
         Manager.RestartGame(isHighScore);
     }
 
     void updatePlayerData()
     {
         OverallJumpBoosts += JumpBoosts;
+
+        // Reset in one game challenges
+        ChallengeManager.ResetChallengeProgress(0);
+        ChallengeProgress = updateChallengeProgress();
+    }
+
+    List<Challenge> updateChallengeProgress()
+    {
+        List<Challenge> challengeProgress = new List<Challenge>();
+        foreach (Challenge challenge in ChallengeManager.Challenges)
+        {
+            if (challenge.Progress > 0)
+            {
+                challengeProgress.Add(challenge);
+            }
+        }
+        return challengeProgress;
     }
 
     void loadGameData()
@@ -269,9 +289,32 @@ public class Player : MonoBehaviour
             this.GoldenTiles = loadedData.GoldenTiles;
             this.HighScore = loadedData.HighScore;
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
-            this.CompletedChallanges = new List<int>(loadedData.CompletedChallanges);
-            this.UnlockedSkins = new List<int>(loadedData.CompletedChallanges);
+            this.CompletedChallanges = (isNullOrEmpty(loadedData.CompletedChallenges)) ? new List<int>() : new List<int>(loadedData.CompletedChallenges);
+            this.UnlockedSkins = (isNullOrEmpty(loadedData.UnlockedSkins)) ? new List<int>() : new List<int>(loadedData.UnlockedSkins);
+            this.ChallengeProgress = loadChallengeProgress(loadedData.ChallengeProgress);
         }
+    }
+
+    bool isNullOrEmpty(int[] array)
+    {
+        return (array == null || array.Length == 0);
+    }
+
+    List<Challenge> loadChallengeProgress(Dictionary<int, int> challengeProgress)
+    {
+        List<Challenge> challenges = new List<Challenge>();
+        
+        if (challengeProgress != null && challengeProgress.Count > 0)
+        {
+            foreach (KeyValuePair<int, int> progress in challengeProgress)
+            {
+                Challenge selectedChallenge = ChallengeManager.Challenges[progress.Key];
+                selectedChallenge.Progress = progress.Value;
+                challenges.Add(selectedChallenge);
+            }
+        }
+
+        return challenges;
     }
 
     void colorBallCheck()

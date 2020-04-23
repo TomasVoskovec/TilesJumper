@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ChallengeManager : MonoBehaviour
 {
 
-    public Challenge[] Challenges;
+    public List<Challenge> Challenges;
     [Space]
     public GameObject Challenge_UI;
     public GameObject MainMenu_UI;

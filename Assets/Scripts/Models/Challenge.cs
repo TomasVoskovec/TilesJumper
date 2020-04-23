@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Challenge 
+public class Challenge
 {
     public int ID;
     public int GroupID;
