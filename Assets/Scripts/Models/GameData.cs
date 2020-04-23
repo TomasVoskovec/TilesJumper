@@ -12,6 +12,7 @@ namespace Assets.Scripts.Models
         public int HighScore { get; set; }
         public int GoldenTiles { get; set; }
         public int OverallJumpBoosts { get; set; }
+        public int CurrentSkinID { get; set; }
         public int[] CompletedChallenges { get; set; }
         public int[] UnlockedSkins { get; set; }
         public Dictionary<int, int> ChallengeProgress { get; set; }
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Models
             this.HighScore = player.HighScore;
             this.GoldenTiles = player.GoldenTiles;
             this.OverallJumpBoosts = player.OverallJumpBoosts;
+            this.CurrentSkinID = player.CurrentSkinID;
             this.CompletedChallenges = player.CompletedChallanges.ToArray();
             this.UnlockedSkins = player.UnlockedSkins.ToArray();
             this.ChallengeProgress = getChallengeProgress(player);

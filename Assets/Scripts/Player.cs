@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
     // Animation
     Animator jumpAnimator;
 
+    // Skin props
+    SkinSelect skinSelect;
+
     [Space]
     [Header("GameData")]
     public int GoldenTiles;
@@ -59,7 +62,9 @@ public class Player : MonoBehaviour
     public Menu Menu;
     public GameObject Map;
     public GameManager Manager;
+    public GameObject SkinManager;
     public ChallengeManager ChallengeManager;
+
     [Space]
     [Header("Developer tools")]
     public bool End;
@@ -76,6 +81,9 @@ public class Player : MonoBehaviour
         {
             GameDataManager.Restore();
         }
+
+        // Load skin select sript
+        skinSelect = SkinManager.GetComponent<SkinSelect>();
 
         // Load saved player data
         loadGameData();
@@ -289,6 +297,8 @@ public class Player : MonoBehaviour
             this.GoldenTiles = loadedData.GoldenTiles;
             this.HighScore = loadedData.HighScore;
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
+            this.CurrentSkinID = loadedData.CurrentSkinID;
+            loadSkin();
             this.CompletedChallanges = (isNullOrEmpty(loadedData.CompletedChallenges)) ? new List<int>() : new List<int>(loadedData.CompletedChallenges);
             this.UnlockedSkins = (isNullOrEmpty(loadedData.UnlockedSkins)) ? new List<int>() : new List<int>(loadedData.UnlockedSkins);
             this.ChallengeProgress = loadChallengeProgress(loadedData.ChallengeProgress);
@@ -298,6 +308,12 @@ public class Player : MonoBehaviour
     bool isNullOrEmpty(int[] array)
     {
         return (array == null || array.Length == 0);
+    }
+
+    void loadSkin()
+    {
+        GetComponentInChildren<MeshFilter>().mesh = skinSelect.Skins[CurrentSkinID].SkinMesh;
+        GetComponentInChildren<MeshRenderer>().material = skinSelect.Skins[CurrentSkinID].SkinMaterial;
     }
 
     List<Challenge> loadChallengeProgress(Dictionary<int, int> challengeProgress)

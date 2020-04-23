@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Assets.Scripts.Models;
+
 public class SkinSelect : MonoBehaviour
 {
     [Header("Public references")]
@@ -163,16 +165,23 @@ public class SkinSelect : MonoBehaviour
         currentPlayerMaterial = Skins[SelectedSkinID].SkinMaterial;
         player.CurrentSkinID = SelectedSkinID;
         skinCheck();
+
+        GameDataManager.Save(player);
     }
     public void BuySkin()
     {
         if (manager.GoldenTiles >= Skins[SelectedSkinID].Price)
         {
+            Skin skin = Skins[SelectedSkinID];
+
+            player.UnlockedSkins.Add(skin.ID);
             
-            Skins[SelectedSkinID].Unlocked = true;
+            skin.Unlocked = true;
             LockImage.GetComponent<Animator>().SetTrigger("fade");
             skinCheck();
             manager.Remove(Skins[SelectedSkinID].Price);
+
+            GameDataManager.Save(player);
         }
 
         
