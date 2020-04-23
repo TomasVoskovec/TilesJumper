@@ -9431,6 +9431,7 @@ MonoBehaviour:
   OverallJumpBoosts: 0
   CompletedChallanges: 
   UnlockedSkins: 
+  ChallengeProgress: []
   LerpDistance: -0.7
   JumpHeight: 0
   StartSpeed: 1
@@ -9443,7 +9444,7 @@ MonoBehaviour:
   CurrentSkinID: 0
   Menu: {fileID: 1584059136}
   Map: {fileID: 1868997469}
-  Manager: {fileID: 0}
+  Manager: {fileID: 1116723710}
   ChallengeManager: {fileID: 1116723712}
   End: 0
   CanAccelerate: 1
