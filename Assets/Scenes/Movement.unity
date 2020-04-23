@@ -2459,19 +2459,16 @@ MonoBehaviour:
     SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
     SkinMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
-    Unlocked: 1
   - ID: 1
     Name: Cube
     SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
     SkinMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
-    Unlocked: 0
   - ID: 2
     Name: Cylinder
     SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
     SkinMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
-    Unlocked: 1
 --- !u!4 &314061795
 Transform:
   m_ObjectHideFlags: 0

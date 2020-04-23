@@ -70,7 +70,7 @@ public class SkinSelect : MonoBehaviour
     }
     private void skinUnlocked()
     {
-        if (Skins[SelectedSkinID].Unlocked)
+        if (player.UnlockedSkins.Contains(SelectedSkinID))
         {
             // If the skin is unlocked enable light and disable the "lock" image
             ShowLight.SetActive(true);
@@ -177,8 +177,8 @@ public class SkinSelect : MonoBehaviour
             Skin skin = Skins[SelectedSkinID];
 
             player.UnlockedSkins.Add(skin.ID);
-            
-            skin.Unlocked = true;
+
+            player.UnlockedSkins.Add(SelectedSkinID);
             LockImage.GetComponent<Animator>().SetTrigger("fade");
             skinCheck();
             manager.Remove(Skins[SelectedSkinID].Price);
