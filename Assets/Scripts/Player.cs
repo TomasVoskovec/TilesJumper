@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
+    public ParticleSystem BoostParticles;
 
     [Space]
     [Header("Skin")]
@@ -184,9 +185,11 @@ public class Player : MonoBehaviour
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.JumpMaster);
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
+                BoostParticles.Play();
             }
             else
             {
+                BoostParticles.Stop();
                 endPossitionn.z += LerpDistance;
                 Points++;
                 ChallengeManager.ResetChallengeProgress(Challenge.GroupName.JumpMaster);
@@ -256,7 +259,13 @@ public class Player : MonoBehaviour
                         }
                         else
                         {
+                            // Set color of Player
                             gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                            // Set color of Jump Boost particles
+                            ParticleSystem.MainModule settings = BoostParticles.main;
+                            Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                            color.a = 1;
+                            settings.startColor = new ParticleSystem.MinMaxGradient(color);
                         }
                     }
                 }
@@ -407,6 +416,10 @@ public class Player : MonoBehaviour
             if (hit.collider.tag == "ColorBall")
             {
                 gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                ParticleSystem.MainModule settings = BoostParticles.main;
+                Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                color.a = 1;
+                settings.startColor = new ParticleSystem.MinMaxGradient(color);
                 Destroy(hit.collider.gameObject);
             }
         }
