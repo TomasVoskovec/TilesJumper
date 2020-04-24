@@ -19,7 +19,7 @@ public class Challenge
     public enum GroupName
     {
         JumpMaster,
-        DeathJuper,
+        DeathJumper,
         ScoreJumper
     }
 }

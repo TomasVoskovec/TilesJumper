@@ -276,7 +276,7 @@ public class Player : MonoBehaviour
         }
 
         // Update challenges
-        ChallengeManager.ProgressChallenge(Challenge.GroupName.DeathJuper);
+        ChallengeManager.ProgressChallenge(Challenge.GroupName.DeathJumper);
         ChallengeManager.ResetChallengeProgress(Challenge.GroupName.ScoreJumper);
         updatePlayerData();
 
