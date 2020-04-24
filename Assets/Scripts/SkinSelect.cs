@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,10 +29,11 @@ public class SkinSelect : MonoBehaviour
     private Mesh currentPlayerMesh;
     private Material currentPlayerMaterial;
     private GameManager manager;
-    public int SelectedSkinID;
+    public Skin SelectedSkin;
     public bool SkinSelectionActive;
-    public Skin[] Skins;
-    
+    public List<Skin> Skins;
+
+    int selectedSkinIndex;
 
     void Start()
     {
@@ -47,7 +49,7 @@ public class SkinSelect : MonoBehaviour
     {
         if (SkinSelectionActive)
         {
-            if (SelectedSkinID + 1 >= Skins.Length)
+            if (Skins.IndexOf(SelectedSkin) + 1 >= Skins.Count)
             {
                 Next.interactable = false;
             }
@@ -56,7 +58,7 @@ public class SkinSelect : MonoBehaviour
                 Next.interactable = true;
             }
 
-            if (SelectedSkinID <= 0)
+            if (Skins.IndexOf(SelectedSkin) <= 0)
             {
                 Previous.interactable = false;
             }
@@ -70,7 +72,7 @@ public class SkinSelect : MonoBehaviour
     }
     private void skinUnlocked()
     {
-        if (player.UnlockedSkins.Contains(SelectedSkinID))
+        if (player.UnlockedSkins.Contains(SelectedSkin))
         {
             // If the skin is unlocked enable light and disable the "lock" image
             ShowLight.SetActive(true);
@@ -78,7 +80,7 @@ public class SkinSelect : MonoBehaviour
             PriceGameobject.SetActive(false);
 
             // If the selected skin is the current active skin show image
-            if (SelectedSkinID == player.CurrentSkinID)
+            if (SelectedSkin == player.CurrentSkin)
             {
                 Activate.interactable = false;
                 ActivatedSkinImage.SetActive(true);
@@ -96,8 +98,8 @@ public class SkinSelect : MonoBehaviour
             ActivatedSkinImage.SetActive(false);
             LockImage.SetActive(true);
             PriceGameobject.SetActive(true);
-            Price_text.text = Skins[SelectedSkinID].Price.ToString();
-            if (player.GoldenTiles >= Skins[SelectedSkinID].Price)
+            Price_text.text = Skins[SelectedSkin.ID].Price.ToString();
+            if (player.GoldenTiles >= Skins[SelectedSkin.ID].Price)
             {
                 Buy.interactable = true;
 
@@ -120,7 +122,7 @@ public class SkinSelect : MonoBehaviour
         Points_UI.SetActive(!enable);
         SkinSelectionActive = enable;
         
-        SelectedSkinID = 0;
+        SelectedSkin = player.CurrentSkin;
         // Check which skins are avaivable
         skinCheck();
         // Set player animation to "showcase" animation
@@ -132,8 +134,8 @@ public class SkinSelect : MonoBehaviour
             currentPlayerMesh = player.GetComponentInChildren<MeshFilter>().mesh;
             currentPlayerMaterial = player.GetComponentInChildren<MeshRenderer>().material;
             // Display skin name
-            Name.text = Skins[SelectedSkinID].Name;
-            player.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID].SkinMesh;
+            Name.text = SelectedSkin.Name;
+            player.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
         }
         else
         {
@@ -144,49 +146,44 @@ public class SkinSelect : MonoBehaviour
     // Show next skin
     public void NextSkin()
     {
-        player.gameObject.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID + 1].SkinMesh;
-        player.GetComponentInChildren<MeshRenderer>().material = Skins[SelectedSkinID + 1].SkinMaterial;
-        SelectedSkinID++;
+        SelectedSkin = Skins[Skins.IndexOf(SelectedSkin) + 1];
+        player.gameObject.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
+        player.GetComponentInChildren<MeshRenderer>().material = SelectedSkin.SkinMaterial;
         skinCheck();
-        Name.text = Skins[SelectedSkinID].Name;
+        Name.text = SelectedSkin.Name;
     }
     // Show previous skin
     public void PreviousSkin()
     {
-        player.gameObject.GetComponentInChildren<MeshFilter>().mesh = Skins[SelectedSkinID - 1].SkinMesh;
-        player.GetComponentInChildren<MeshRenderer>().material = Skins[SelectedSkinID - 1].SkinMaterial;
-        SelectedSkinID--;
+        SelectedSkin = Skins[Skins.IndexOf(SelectedSkin) - 1];
+        player.gameObject.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
+        player.GetComponentInChildren<MeshRenderer>().material = SelectedSkin.SkinMaterial;
         skinCheck();
-        Name.text = Skins[SelectedSkinID].Name;
+        Name.text = SelectedSkin.Name;
     }
 
     //Activate selected skin
     public void ActivateSkin()
     {
-        currentPlayerMesh = Skins[SelectedSkinID].SkinMesh;
-        currentPlayerMaterial = Skins[SelectedSkinID].SkinMaterial;
-        player.CurrentSkinID = SelectedSkinID;
+        currentPlayerMesh = SelectedSkin.SkinMesh;
+        currentPlayerMaterial = SelectedSkin.SkinMaterial;
+        player.CurrentSkin = SelectedSkin;
         skinCheck();
 
         GameDataManager.Save(player);
     }
     public void BuySkin()
     {
-        if (player.GoldenTiles >= Skins[SelectedSkinID].Price)
+        if (player.GoldenTiles >= SelectedSkin.Price)
         {
-            Skin skin = Skins[SelectedSkinID];
+            player.UnlockedSkins.Add(SelectedSkin);
 
-            player.UnlockedSkins.Add(skin.ID);
-
-            player.UnlockedSkins.Add(SelectedSkinID);
             LockImage.GetComponent<Animator>().SetTrigger("fade");
             skinCheck();
-            manager.Remove(Skins[SelectedSkinID].Price);
+            manager.Remove(SelectedSkin.Price);
 
             GameDataManager.Save(player);
         }
-
-        
     }
 
 

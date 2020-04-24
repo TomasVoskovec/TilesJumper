@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Assets.Scripts.Models;
+using System.Linq;
 
 public class Player : MonoBehaviour
 {
@@ -25,12 +26,13 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("GameData")]
+    public bool FirstGame = true;
     public int GoldenTiles;
     public int HighScore;
     public int JumpBoosts;
     public int OverallJumpBoosts;
     public List<int> CompletedChallanges;
-    public List<int> UnlockedSkins;
+    public List<Skin> UnlockedSkins;
     public List<Challenge> ChallengeProgress;
 
     [Space]
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Skin")]
-    public int CurrentSkinID;
+    public Skin CurrentSkin;
 
     [Space]
     [Header("Public references")]
@@ -88,6 +90,12 @@ public class Player : MonoBehaviour
         // Load saved player data
         loadGameData();
 
+        // First game action
+        if (FirstGame)
+        {
+            firstGame();
+        }
+
         // Menu
         Manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
 
@@ -113,6 +121,7 @@ public class Player : MonoBehaviour
         // Load UI values
         Manager.LoadValues();
     }
+
     private void Update()
     {
         // Jump 2x farther if you click / tap on display
@@ -130,6 +139,7 @@ public class Player : MonoBehaviour
 
         }
     }
+
     private void FixedUpdate()
     {
         // Check if player has found colorball, using RayCast 
@@ -147,6 +157,15 @@ public class Player : MonoBehaviour
         {
             transform.position = Lerp(startPossition, endPossitionn, timeStartedLerping, Speed + Speed * 0.2f);
         }
+    }
+
+    void firstGame()
+    {
+        UnlockedSkins.Add(skinSelect.Skins[0]);
+
+        FirstGame = false;
+
+        GameDataManager.Save(this);
     }
 
     // Starts the Lerping animation
@@ -294,15 +313,30 @@ public class Player : MonoBehaviour
 
         if(loadedData != null)
         {
+            this.FirstGame = loadedData.FirstGame;
             this.GoldenTiles = loadedData.GoldenTiles;
             this.HighScore = loadedData.HighScore;
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
-            this.CurrentSkinID = loadedData.CurrentSkinID;
+            this.CurrentSkin = loadCurrentSkin(loadedData.CurrentSkinID);
             loadSkin();
             this.CompletedChallanges = (isNullOrEmpty(loadedData.CompletedChallenges)) ? new List<int>() : new List<int>(loadedData.CompletedChallenges);
-            this.UnlockedSkins = (isNullOrEmpty(loadedData.UnlockedSkins)) ? new List<int>() : new List<int>(loadedData.UnlockedSkins);
+            this.UnlockedSkins = loadUnlockedSkins(loadedData.UnlockedSkins);
             this.ChallengeProgress = loadChallengeProgress(loadedData.ChallengeProgress);
         }
+    }
+
+    Skin loadCurrentSkin(int skinId)
+    {
+        Skin currentSkin = new Skin();
+        foreach(Skin skin in skinSelect.Skins)
+        {
+            if(skin.ID == skinId)
+            {
+                currentSkin = skin;
+            }
+        }
+
+        return currentSkin;
     }
 
     bool isNullOrEmpty(int[] array)
@@ -310,10 +344,30 @@ public class Player : MonoBehaviour
         return (array == null || array.Length == 0);
     }
 
+    List<Skin> loadUnlockedSkins(int[] skinsId)
+    {
+        List<Skin> skins = new List<Skin>();
+        if(!isNullOrEmpty(skinsId))
+        {
+            foreach(int skinId in skinsId)
+            {
+                foreach(Skin skin in skinSelect.Skins)
+                {
+                    if(skin.ID == skinId)
+                    {
+                        skins.Add(skin);
+                    }
+                }
+            }
+        }
+
+        return skins;
+    }
+
     void loadSkin()
     {
-        GetComponentInChildren<MeshFilter>().mesh = skinSelect.Skins[CurrentSkinID].SkinMesh;
-        GetComponentInChildren<MeshRenderer>().material = skinSelect.Skins[CurrentSkinID].SkinMaterial;
+        GetComponentInChildren<MeshFilter>().mesh = CurrentSkin.SkinMesh;
+        GetComponentInChildren<MeshRenderer>().material = CurrentSkin.SkinMaterial;
     }
 
     List<Challenge> loadChallengeProgress(Dictionary<int, int> challengeProgress)

@@ -32,10 +32,7 @@ namespace Assets.Scripts.Models
 
                 return gameData;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public static GameData Restore()

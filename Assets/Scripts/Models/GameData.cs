@@ -9,6 +9,7 @@ namespace Assets.Scripts.Models
     [Serializable]
     public class GameData
     {
+        public bool FirstGame { get; set; }
         public int HighScore { get; set; }
         public int GoldenTiles { get; set; }
         public int OverallJumpBoosts { get; set; }
@@ -19,23 +20,37 @@ namespace Assets.Scripts.Models
 
         public GameData(Player player)
         {
+            this.FirstGame = player.FirstGame;
             this.HighScore = player.HighScore;
             this.GoldenTiles = player.GoldenTiles;
             this.OverallJumpBoosts = player.OverallJumpBoosts;
-            this.CurrentSkinID = player.CurrentSkinID;
+            this.CurrentSkinID = player.CurrentSkin.ID;
             this.CompletedChallenges = player.CompletedChallanges.ToArray();
-            this.UnlockedSkins = player.UnlockedSkins.ToArray();
+            this.UnlockedSkins = getSkinsId(player.UnlockedSkins);
             this.ChallengeProgress = getChallengeProgress(player);
         }
 
         public GameData()
         {
+            this.FirstGame = true;
             this.HighScore = 0;
             this.GoldenTiles = 0;
             this.OverallJumpBoosts = 0;
+            this.CurrentSkinID = 0;
             this.CompletedChallenges = new int[0];
             this.UnlockedSkins = new int[0];
             this.ChallengeProgress = new Dictionary<int, int>();
+        }
+
+        int[] getSkinsId(List<Skin> skins)
+        {
+            List<int> skinsId = new List<int>();
+            foreach(Skin skin in skins)
+            {
+                skinsId.Add(skin.ID);
+            }
+
+            return skinsId.ToArray();
         }
 
         Dictionary<int, int> getChallengeProgress(Player player)

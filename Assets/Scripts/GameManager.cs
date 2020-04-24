@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void AddGoldenTiles(int value)
     {
-        player.GoldenTiles += value;
         GoldenTiles = player.GoldenTiles;
+        player.GoldenTiles += value;
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour
     }
     public void Remove(int value)
     {
-        player.GoldenTiles -= value;
         GoldenTiles = player.GoldenTiles;
+        player.GoldenTiles -= value;
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
