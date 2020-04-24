@@ -181,16 +181,16 @@ public class Player : MonoBehaviour
                 Points += 2;
                 JumpBoosts++;
                 JumpBoostsinARow++;
-                ChallengeManager.ProgressChallenge(0);
-                ChallengeManager.ProgressChallenge(2);
-                ChallengeManager.ProgressChallenge(2);
+                ChallengeManager.ProgressChallenge(Challenge.GroupName.JumpMaster);
+                ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
+                ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
             }
             else
             {
                 endPossitionn.z += LerpDistance;
                 Points++;
-                ChallengeManager.ResetChallengeProgress(0);
-                ChallengeManager.ProgressChallenge(2);
+                ChallengeManager.ResetChallengeProgress(Challenge.GroupName.JumpMaster);
+                ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
                 JumpBoostsinARow = 0;
             }
             JumpHeight = 1;
@@ -276,8 +276,8 @@ public class Player : MonoBehaviour
         }
 
         // Update challenges
-        ChallengeManager.ProgressChallenge(1);
-        ChallengeManager.ResetChallengeProgress(2);
+        ChallengeManager.ProgressChallenge(Challenge.GroupName.DeathJuper);
+        ChallengeManager.ResetChallengeProgress(Challenge.GroupName.ScoreJumper);
         updatePlayerData();
 
         

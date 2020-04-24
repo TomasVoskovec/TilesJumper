@@ -6,7 +6,7 @@ using UnityEngine;
 public class Challenge
 {
     public int ID;
-    public int GroupID;
+    public GroupName Group;
     public string Name;
     public int Difficulty;
     [TextArea(5,10)]
@@ -15,5 +15,11 @@ public class Challenge
     public int Progress;
     public int Goal;
     public bool Completed;
-    
+
+    public enum GroupName
+    {
+        JumpMaster,
+        DeathJuper,
+        ScoreJumper
+    }
 }

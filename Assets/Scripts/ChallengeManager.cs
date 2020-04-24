@@ -37,16 +37,16 @@ public class ChallengeManager : MonoBehaviour
         
     }
 
-    public void ProgressChallenge(int GroupID)
+    public void ProgressChallenge(Challenge.GroupName group)
     {
-        StartCoroutine(Progress(GroupID));
+        StartCoroutine(Progress(group));
     }
 
-    IEnumerator Progress(int GroupID)
+    IEnumerator Progress(Challenge.GroupName group)
     {
         foreach (Challenge challenge in Challenges)
         {
-            if (challenge.GroupID == GroupID)
+            if (challenge.Group == group)
             {
                 if (challenge.Progress != challenge.Goal)
                 {
@@ -73,11 +73,11 @@ public class ChallengeManager : MonoBehaviour
             }
         }
     }
-    public void ResetChallengeProgress(int GroupID)
+    public void ResetChallengeProgress(Challenge.GroupName group)
     {
         foreach (Challenge challenge in Challenges)
         {
-            if (challenge.GroupID == GroupID)
+            if (challenge.Group == group)
             {
                 if (challenge.Progress != challenge.Goal)
                 {
@@ -111,7 +111,7 @@ public class ChallengeManager : MonoBehaviour
     void LoadChallenges()
     {
         int i = 0;
-        List<Challenge> SortedList = Challenges.OrderBy(o => o.GroupID).ToList();
+        List<Challenge> SortedList = Challenges.OrderBy(o => o.Group).ToList();
         foreach (Challenge chal in SortedList)
         {
             GameObject challenge = Instantiate(Challenge_prefab, Content_parent.transform);

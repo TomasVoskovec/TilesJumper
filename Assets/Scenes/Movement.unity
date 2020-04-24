@@ -7324,7 +7324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Challenges:
   - ID: 0
-    GroupID: 0
+    Group: 0
     Name: Jump Master (Beginner)
     Difficulty: 1
     Description: Use Jump Boost 2 times in a row
@@ -7333,7 +7333,7 @@ MonoBehaviour:
     Goal: 2
     Completed: 0
   - ID: 1
-    GroupID: 0
+    Group: 0
     Name: Jump Master (Intermediate)
     Difficulty: 2
     Description: Use Jump Boost 4 times in a row
@@ -7342,7 +7342,7 @@ MonoBehaviour:
     Goal: 4
     Completed: 0
   - ID: 2
-    GroupID: 1
+    Group: 1
     Name: Death Jumper (Beginner)
     Difficulty: 1
     Description: Die 20 times
@@ -7351,7 +7351,7 @@ MonoBehaviour:
     Goal: 20
     Completed: 0
   - ID: 3
-    GroupID: 1
+    Group: 1
     Name: Death Jumper (Intermediate)
     Difficulty: 2
     Description: Die 50 times
@@ -7360,7 +7360,7 @@ MonoBehaviour:
     Goal: 50
     Completed: 0
   - ID: 4
-    GroupID: 1
+    Group: 1
     Name: Death Jumper (Challenger)
     Difficulty: 3
     Description: Die 100 times
@@ -7369,7 +7369,7 @@ MonoBehaviour:
     Goal: 100
     Completed: 0
   - ID: 5
-    GroupID: 1
+    Group: 1
     Name: Death Jumper (Master)
     Difficulty: 4
     Description: Die 500 times
@@ -7378,7 +7378,7 @@ MonoBehaviour:
     Goal: 500
     Completed: 0
   - ID: 6
-    GroupID: 0
+    Group: 0
     Name: Jump Master (Challenger)
     Difficulty: 3
     Description: Use Jump Boost 10 times in a row
@@ -7387,7 +7387,7 @@ MonoBehaviour:
     Goal: 10
     Completed: 0
   - ID: 7
-    GroupID: 0
+    Group: 0
     Name: Jump Master (Master)
     Difficulty: 4
     Description: Use Jump Boost 15 times in a row
@@ -7396,7 +7396,7 @@ MonoBehaviour:
     Goal: 15
     Completed: 0
   - ID: 8
-    GroupID: 2
+    Group: 2
     Name: Score Jumper
     Difficulty: 1
     Description: Reach score 50 or over
@@ -7405,7 +7405,7 @@ MonoBehaviour:
     Goal: 50
     Completed: 0
   - ID: 9
-    GroupID: 2
+    Group: 2
     Name: Score Jumper
     Difficulty: 2
     Description: Reach score 100 or over
@@ -7414,7 +7414,7 @@ MonoBehaviour:
     Goal: 100
     Completed: 0
   - ID: 10
-    GroupID: 2
+    Group: 2
     Name: Score Jumper
     Difficulty: 3
     Description: Reach score 500 or over
@@ -7423,7 +7423,7 @@ MonoBehaviour:
     Goal: 500
     Completed: 0
   - ID: 11
-    GroupID: 2
+    Group: 2
     Name: Score Jumper
     Difficulty: 4
     Description: Reach score 1000 or over
