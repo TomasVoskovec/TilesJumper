@@ -1974,8 +1974,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1341469046}
   m_HandleRect: {fileID: 1341469045}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.34022123
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3013,8 +3013,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: -17}
+  m_AnchoredPosition: {x: -0, y: 0}
+  m_SizeDelta: {x: -17, y: 6962.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &399472481
 MonoBehaviour:
@@ -7077,6 +7077,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1090064401}
+  - component: {fileID: 1090064402}
+  - component: {fileID: 1090064403}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -7101,8 +7103,47 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0, y: 0}
-  m_SizeDelta: {x: 0, y: 2892.8}
+  m_SizeDelta: {x: 0, y: -1491.7}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1090064402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090064400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &1090064403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090064400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 300
+    m_Bottom: 300
+  m_ChildAlignment: 4
+  m_Spacing: 500
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
 --- !u!1 &1109226198
 GameObject:
   m_ObjectHideFlags: 0
@@ -7299,6 +7340,96 @@ MonoBehaviour:
     Reward: 500
     Progress: 0
     Goal: 4
+    Completed: 0
+  - ID: 2
+    GroupID: 1
+    Name: Death Jumper (Beginner)
+    Difficulty: 1
+    Description: Die 20 times
+    Reward: 200
+    Progress: 0
+    Goal: 20
+    Completed: 0
+  - ID: 3
+    GroupID: 1
+    Name: Death Jumper (Intermediate)
+    Difficulty: 2
+    Description: Die 50 times
+    Reward: 400
+    Progress: 0
+    Goal: 50
+    Completed: 0
+  - ID: 4
+    GroupID: 1
+    Name: Death Jumper (Challenger)
+    Difficulty: 3
+    Description: Die 100 times
+    Reward: 800
+    Progress: 0
+    Goal: 100
+    Completed: 0
+  - ID: 5
+    GroupID: 1
+    Name: Death Jumper (Master)
+    Difficulty: 4
+    Description: Die 500 times
+    Reward: 1200
+    Progress: 0
+    Goal: 500
+    Completed: 0
+  - ID: 6
+    GroupID: 0
+    Name: Jump Master (Challenger)
+    Difficulty: 3
+    Description: Use Jump Boost 10 times in a row
+    Reward: 800
+    Progress: 0
+    Goal: 10
+    Completed: 0
+  - ID: 7
+    GroupID: 0
+    Name: Jump Master (Master)
+    Difficulty: 4
+    Description: Use Jump Boost 15 times in a row
+    Reward: 1200
+    Progress: 0
+    Goal: 15
+    Completed: 0
+  - ID: 8
+    GroupID: 2
+    Name: Score Jumper
+    Difficulty: 1
+    Description: Reach score 50 or over
+    Reward: 200
+    Progress: 0
+    Goal: 50
+    Completed: 0
+  - ID: 9
+    GroupID: 2
+    Name: Score Jumper
+    Difficulty: 2
+    Description: Reach score 100 or over
+    Reward: 400
+    Progress: 0
+    Goal: 100
+    Completed: 0
+  - ID: 10
+    GroupID: 2
+    Name: Score Jumper
+    Difficulty: 3
+    Description: Reach score 500 or over
+    Reward: 800
+    Progress: 0
+    Goal: 500
+    Completed: 0
+  - ID: 11
+    GroupID: 2
+    Name: Score Jumper
+    Difficulty: 4
+    Description: Reach score 1000 or over
+    Reward: 1200
+    Progress: 0
+    Goal: 1000
     Completed: 0
   Challenge_UI: {fileID: 884097112}
   MainMenu_UI: {fileID: 1584059134}
@@ -9568,7 +9699,7 @@ RectTransform:
   m_Father: {fileID: 1803074271}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.6597787}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -10696,7 +10827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.65882355}
+  m_Color: {r: 0.41960785, g: 0.8352941, b: 0, a: 0.34117648}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

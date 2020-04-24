@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
+
 public class ChallengeManager : MonoBehaviour
 {
 
@@ -48,9 +50,10 @@ public class ChallengeManager : MonoBehaviour
             {
                 if (challenge.Progress != challenge.Goal)
                 {
+                    challenge.Progress++;
                     if (!PopInProgress)
                     {
-                        challenge.Progress++;
+                        
                         if (challenge.Progress == challenge.Goal)
                         {
                             PopInProgress = true;
@@ -60,8 +63,9 @@ public class ChallengeManager : MonoBehaviour
                             PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
                             PopUp.GetComponent<Animator>().SetTrigger("show");
                             yield return new WaitForSeconds(1);
-                            PopInProgress = false;
+                            
                             PopUp.GetComponent<Animator>().SetTrigger("hide");
+                            PopInProgress = false;
                         }
                     }
                 }
@@ -80,6 +84,7 @@ public class ChallengeManager : MonoBehaviour
 
                     challenge.Progress = 0;
                     PopInProgress = false;
+                    PopUp.GetComponent<Animator>().SetTrigger("hide");
                     StopAllCoroutines();
                 }
 
@@ -106,7 +111,8 @@ public class ChallengeManager : MonoBehaviour
     void LoadChallenges()
     {
         int i = 0;
-        foreach(Challenge chal in Challenges)
+        List<Challenge> SortedList = Challenges.OrderBy(o => o.GroupID).ToList();
+        foreach (Challenge chal in SortedList)
         {
             GameObject challenge = Instantiate(Challenge_prefab, Content_parent.transform);
             challenge.transform.position = new Vector3(challenge.transform.position.x, challenge.transform.position.y + i, challenge.transform.position.z);
@@ -120,7 +126,7 @@ public class ChallengeManager : MonoBehaviour
             challenge_settings.Difficulty.text = Difficulty(chal.Difficulty);
             challenge_settings.Difficulty_back.color = difficultyBackground(chal.Difficulty);
             challenge_settings.Challenge = chal;
-            i -= 500;
+            i -= 400;
         }
     }
     string Difficulty(int id)
@@ -136,6 +142,10 @@ public class ChallengeManager : MonoBehaviour
         else if (id == 3)
         {
             return "HARD";
+        }
+        else if (id == 4)
+        {
+            return "MASTER";
         }
         else
         {
@@ -156,6 +166,10 @@ public class ChallengeManager : MonoBehaviour
         else if (id == 3)
         {
             return Color.red;
+        }
+        else if (id == 4)
+        {
+            return Color.black;
         }
         else
         {

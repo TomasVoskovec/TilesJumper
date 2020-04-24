@@ -182,12 +182,15 @@ public class Player : MonoBehaviour
                 JumpBoosts++;
                 JumpBoostsinARow++;
                 ChallengeManager.ProgressChallenge(0);
+                ChallengeManager.ProgressChallenge(2);
+                ChallengeManager.ProgressChallenge(2);
             }
             else
             {
                 endPossitionn.z += LerpDistance;
                 Points++;
                 ChallengeManager.ResetChallengeProgress(0);
+                ChallengeManager.ProgressChallenge(2);
                 JumpBoostsinARow = 0;
             }
             JumpHeight = 1;
@@ -272,7 +275,12 @@ public class Player : MonoBehaviour
             isHighScore = true;
         }
 
+        // Update challenges
+        ChallengeManager.ProgressChallenge(1);
+        ChallengeManager.ResetChallengeProgress(2);
         updatePlayerData();
+
+        
 
         // Show end menu and restart game
         End = true;
@@ -283,6 +291,9 @@ public class Player : MonoBehaviour
         GameDataManager.Save(this);
         // Restart game
         Manager.RestartGame(isHighScore);
+
+        
+        
     }
 
     void updatePlayerData()
