@@ -73,18 +73,12 @@ public class Player : MonoBehaviour
     public bool End;
     public bool CanAccelerate = true;
     public bool JumpBoost;
-    public bool RestoreData = false;
     public int JumpBoostsinARow;
     public int Lerps = 0;
     public float Speed;
 
     void Start()
     {
-        if (RestoreData)
-        {
-            GameDataManager.Restore();
-        }
-
         // Load skin select sript
         skinSelect = SkinManager.GetComponent<SkinSelect>();
 
@@ -423,5 +417,12 @@ public class Player : MonoBehaviour
                 Destroy(hit.collider.gameObject);
             }
         }
+    }
+
+    public void RestoreGameData()
+    {
+        GameDataManager.Restore();
+        loadGameData();
+        Manager.RestartGame(false);
     }
 }

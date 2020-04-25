@@ -109,4 +109,16 @@ public class GameManager : MonoBehaviour
             GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
     }
+
+    public void RestoreGameData()
+    {
+        GameDataManager.Restore();
+        restart();
+    }
+
+    void restart()
+    {
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(scene);
+    }
 }
