@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [Header("Game")]
     public int GoldenTiles;
     public GameObject GoldenTiles_UI;
+    public float GoldenTilesAnimationDuration = 0.01f;
+
     [Space]
     [Header("Cheats")]
     public bool Immortality;
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
-        StartCoroutine(AddGoldenTilesAnim(value));
+        StartCoroutine(AddGoldenTilesAnim());
     }
     public void Remove(int value)
     {
@@ -76,42 +78,35 @@ public class GameManager : MonoBehaviour
         GameDataManager.Save(player);
         GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
-        StartCoroutine(RemoveGoldenTiles(value));
+        StartCoroutine(RemoveGoldenTiles());
     }
-    IEnumerator AddGoldenTilesAnim(int value)
+    IEnumerator AddGoldenTilesAnim()
     {
-        int i = 0;
-        while(i < value)
+        while(GoldenTiles != player.GoldenTiles)
         {
             GoldenTiles++;
-            i++;
             UpdateValues();
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(GoldenTilesAnimationDuration);
         }
-        if (i == value)
+        if (GoldenTiles == player.GoldenTiles)
         {
-            GoldenTiles = player.GoldenTiles;
             UpdateValues();
             GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
 
     }
-    IEnumerator RemoveGoldenTiles(int value)
+    IEnumerator RemoveGoldenTiles()
     {
-        int i = value;
-        while (i > 0)
+        while (GoldenTiles != player.GoldenTiles)
         {
             GoldenTiles--;
-            i--;
             UpdateValues();
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(GoldenTilesAnimationDuration);
         }
-        if (i == value)
+        if (GoldenTiles == player.GoldenTiles)
         {
-            GoldenTiles = player.GoldenTiles;
             UpdateValues();
             GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
-
     }
 }

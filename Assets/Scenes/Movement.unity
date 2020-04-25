@@ -7292,6 +7292,7 @@ MonoBehaviour:
   menu: {fileID: 1577939318}
   GoldenTiles: 0
   GoldenTiles_UI: {fileID: 2138298767}
+  GoldenTilesAnimationDuration: 0.01
   Immortality: 0
   GameMusic: {fileID: 1301952547}
   MenuMusic: {fileID: 610104873}
@@ -19165,7 +19166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canLerpNext: 0
   FirstGame: 0
-  GoldenTiles: 0
+  GoldenTiles: 600
   HighScore: 0
   JumpBoosts: 0
   OverallJumpBoosts: 0
