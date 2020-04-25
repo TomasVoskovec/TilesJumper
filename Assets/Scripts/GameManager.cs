@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator AddGoldenTilesAnim()
     {
-        while(GoldenTiles != player.GoldenTiles)
+        while(GoldenTiles < player.GoldenTiles)
         {
             GoldenTiles++;
             UpdateValues();
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator RemoveGoldenTiles()
     {
-        while (GoldenTiles != player.GoldenTiles)
+        while (GoldenTiles > player.GoldenTiles)
         {
             GoldenTiles--;
             UpdateValues();
