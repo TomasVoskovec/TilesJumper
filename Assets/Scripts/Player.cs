@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Gameplay")]
+    public int CanJumpBoostAfter = 2;
     public float StartSpeed = 1;
     public float MaxSpeed = 2;
     public float Acceleration = 0.001f;
@@ -73,8 +74,8 @@ public class Player : MonoBehaviour
     public bool End;
     public bool CanAccelerate = true;
     public bool JumpBoost;
+    public int Jumps;
     public int JumpBoostsinARow;
-    public int Lerps = 0;
     public float Speed;
 
     void Start()
@@ -126,7 +127,6 @@ public class Player : MonoBehaviour
             if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
             {
 
-                Lerps += 2;
                 JumpHeight = 2;
                 JumpBoost = true;
                 
@@ -168,9 +168,10 @@ public class Player : MonoBehaviour
     {
         if (!Manager.MainMenuActive && !End)
         {
+            Jumps++;
             timeStartedLerping = Time.time;
             UpdateUI();
-            if (JumpBoost)
+            if (JumpBoost && Jumps >= CanJumpBoostAfter)
             {
                 endPossitionn.z += LerpDistance * 2;
                 Points += 2;

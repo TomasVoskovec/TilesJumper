@@ -834,7 +834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6899,7 +6899,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.0290315, y: 0.96858186, z: -0.13660048, w: 0.20578322}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7961,7 +7961,7 @@ PrefabInstance:
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
       propertyPath: AvailableColors.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
@@ -8006,7 +8006,7 @@ PrefabInstance:
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
       propertyPath: AvailableColors.Array.data[2].r
-      value: 0
+      value: 0.16666675
       objectReference: {fileID: 0}
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
@@ -8016,7 +8016,7 @@ PrefabInstance:
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
       propertyPath: AvailableColors.Array.data[2].b
-      value: 0.016950846
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
@@ -8532,6 +8532,16 @@ PrefabInstance:
     - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
         type: 3}
       propertyPath: AvailableColors.Array.data[0].a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
+        type: 3}
+      propertyPath: ChangeColorAfter
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212448915316695712, guid: a7e02e14959aaa646a8eb9f6f820fad5,
+        type: 3}
+      propertyPath: WhiteTileNumber
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6212448915316695713, guid: a7e02e14959aaa646a8eb9f6f820fad5,
@@ -19556,6 +19566,7 @@ MonoBehaviour:
   ChallengeProgress: []
   LerpDistance: -0.7
   JumpHeight: 0
+  CanJumpBoostAfter: 2
   StartSpeed: 1
   MaxSpeed: 2
   Acceleration: 0.001
@@ -19578,8 +19589,8 @@ MonoBehaviour:
   End: 0
   CanAccelerate: 1
   JumpBoost: 0
+  Jumps: 0
   JumpBoostsinARow: 0
-  Lerps: 0
   Speed: 0
 --- !u!4 &1118289667193976791
 Transform:

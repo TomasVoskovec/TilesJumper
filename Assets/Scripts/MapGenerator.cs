@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    [Space]
+    [Header("Public references")]
+
     // Get players props and players script
     public GameObject Player;
     Player playerScript;
@@ -11,20 +14,36 @@ public class MapGenerator : MonoBehaviour
     // Tiles game objects
     public List<GameObject> Tiles = new List<GameObject>();
 
+    // Changing color ball object
+    public GameObject ColorBall;
+
     // Tiles props
     bool canChangeColor = false;
     int tileNumber = 0;
-    public int renderDistance = 10;
-    public int WhiteTileNumber;
+
+    [Space]
+    [Header("Map Settings")]
+
+    // Map settings
+    public int RenderDistance = 10;
+    public int ChangeColorAfter = 5;
 
     float tileScale;
     float tileWhiteZ;
     float tileBlackZ;
 
+    [Space]
+    [Header("Tile collors")]
+
     // Colors of tiles
-    public Color CurrentColor;
     public List<Color> AvailableColors;
-    public GameObject ColorBall;
+
+    [Space]
+    [Header("Developer tools")]
+
+    // Developer data
+    public Color CurrentColor;
+    public int WhiteTileNumber;
 
     void Start()
     {
@@ -51,7 +70,7 @@ public class MapGenerator : MonoBehaviour
     // Check if can generate depending on the render distance
     bool canGanarate()
     {
-        if (playerScript.Points + renderDistance <= WhiteTileNumber)
+        if (playerScript.Points + RenderDistance <= WhiteTileNumber)
         {
             return false;
         }
@@ -85,7 +104,7 @@ public class MapGenerator : MonoBehaviour
             tileWhiteZ -= 0.035f * tileScale;
             GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
-            if (canChangeColor)
+            if (canChangeColor && WhiteTileNumber >= ChangeColorAfter)
             {
                 if(percentageChance(0.5f))
                 {

@@ -30,7 +30,6 @@ public class TileCollision : MonoBehaviour
     {
         if (!player.End)
         {
-            player.Lerps = 1;
             player.StartLerping();
             
             // Accelerate player (animation speed)
