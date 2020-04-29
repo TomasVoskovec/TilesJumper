@@ -1440,7 +1440,7 @@ MonoBehaviour:
   Completed: {fileID: 3319279900519692970}
   Challenge:
     ID: 0
-    GroupID: 0
+    Group: 0
     Name: 
     Difficulty: 0
     Description: 
