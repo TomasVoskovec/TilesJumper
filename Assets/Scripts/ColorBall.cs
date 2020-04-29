@@ -25,12 +25,10 @@ public class ColorBall : MonoBehaviour
 
         // Change color of the particles to the color of the colorball
         Color color = gameObject.GetComponent<MeshRenderer>().material.color;
-
-
         ParticleSystem.MainModule settings = particles.main;
-        
         color.a = 1;
         settings.startColor = new ParticleSystem.MinMaxGradient(color);
+
         // Change color of the light to the color of the colorball
         //ballLight.color = color;
     }

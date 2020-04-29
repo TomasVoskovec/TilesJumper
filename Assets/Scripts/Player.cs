@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public int JumpBoosts;
     public int OverallJumpBoosts;
     public int Deaths;
-    public int CollectedCollorChangers;
+    public int CollectedColorChangers;
     public List<int> CompletedChallanges;
     public List<Skin> UnlockedSkins;
     public List<Challenge> ChallengeProgress;
@@ -336,7 +336,7 @@ public class Player : MonoBehaviour
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
             this.CurrentSkin = loadCurrentSkin(loadedData.CurrentSkinID);
             this.Deaths = loadedData.Deaths;
-            this.CollectedCollorChangers = loadedData.CollectedCollorChangers;
+            this.CollectedColorChangers = loadedData.CollectedColorChangers;
             this.CompletedChallanges = (isNullOrEmpty(loadedData.CompletedChallenges)) ? new List<int>() : new List<int>(loadedData.CompletedChallenges);
             this.UnlockedSkins = loadUnlockedSkins(loadedData.UnlockedSkins);
             this.ChallengeProgress = loadChallengeProgress(loadedData.ChallengeProgress);
@@ -414,6 +414,8 @@ public class Player : MonoBehaviour
             // If the object it hits has the tag "ColorBall"
             if (hit.collider.tag == "ColorBall")
             {
+                CollectedColorChangers++;
+
                 gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                 ParticleSystem.MainModule settings = BoostParticles.main;
                 Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;

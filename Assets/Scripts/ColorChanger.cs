@@ -23,11 +23,8 @@ public class ColorChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        print("hit");
-
         if(collider == player)
         {
-            player.GetComponent<Player>().CollectedCollorChangers++;
             playerRend.material.color = rend.material.color;
         }
     }

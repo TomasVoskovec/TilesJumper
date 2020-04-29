@@ -15,7 +15,7 @@ namespace Assets.Scripts.Models
         public int OverallJumpBoosts { get; set; }
         public int CurrentSkinID { get; set; }
         public int Deaths { get; set; }
-        public int CollectedCollorChangers { get; set; }
+        public int CollectedColorChangers { get; set; }
         public int[] CompletedChallenges { get; set; }
         public int[] UnlockedSkins { get; set; }
         public Dictionary<int, int> ChallengeProgress { get; set; }
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Models
             this.OverallJumpBoosts = player.OverallJumpBoosts;
             this.CurrentSkinID = player.CurrentSkin.ID;
             this.Deaths = player.Deaths;
-            this.CollectedCollorChangers = player.CollectedCollorChangers;
+            this.CollectedColorChangers = player.CollectedColorChangers;
             this.CompletedChallenges = player.CompletedChallanges.ToArray();
             this.UnlockedSkins = getSkinsId(player.UnlockedSkins);
             this.ChallengeProgress = getChallengeProgress(player);
@@ -42,7 +42,7 @@ namespace Assets.Scripts.Models
             this.OverallJumpBoosts = 0;
             this.CurrentSkinID = 0;
             this.Deaths = 0;
-            this.CollectedCollorChangers = 0;
+            this.CollectedColorChangers = 0;
             this.CompletedChallenges = new int[0];
             this.UnlockedSkins = new int[0];
             this.ChallengeProgress = new Dictionary<int, int>();
