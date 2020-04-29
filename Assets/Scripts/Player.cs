@@ -119,6 +119,8 @@ public class Player : MonoBehaviour
 
         // Load UI values
         Manager.LoadValues();
+
+        
     }
 
     private void Update()
