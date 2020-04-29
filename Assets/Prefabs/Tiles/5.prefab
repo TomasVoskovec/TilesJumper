@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7951135056017816934}
   - component: {fileID: 4116563455340356701}
   - component: {fileID: 222625701608922917}
+  - component: {fileID: 8713746537723304412}
   m_Layer: 0
   m_Name: 5
   m_TagString: tile
@@ -144,3 +145,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8713746537723304412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4776882111478766478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2ed26b4e4d7ad4685d94742ce78631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileColor: {r: 0, g: 0, b: 0, a: 0}

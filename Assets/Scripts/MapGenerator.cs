@@ -113,17 +113,20 @@ public class MapGenerator : MonoBehaviour
                         GenerateColorBall(gameobject);
                     }
                     var block = new MaterialPropertyBlock();
+                    Color color = otherRandomColor();
 
-                    
-                    block.SetColor("_BaseColor", otherRandomColor()); 
-                    GetComponentInChildren<Renderer>().SetPropertyBlock(block);
+
+                    block.SetColor("_BaseColor", color); 
+                    gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
+                    gameobject.GetComponentInChildren<Tile>().TileColor = color;
                     canChangeColor = false;
                 }
                 else
                 {
                     var block = new MaterialPropertyBlock();
                     block.SetColor("_BaseColor", CurrentColor);
-                    GetComponentInChildren<Renderer>().SetPropertyBlock(block);
+                    gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
+                    gameobject.GetComponentInChildren<Tile>().TileColor = CurrentColor;
                     canChangeColor = true;
                 }
             }
@@ -132,7 +135,8 @@ public class MapGenerator : MonoBehaviour
                 var block = new MaterialPropertyBlock();
                 block.SetColor("_BaseColor", CurrentColor);
                 gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
-                
+                gameobject.GetComponentInChildren<Tile>().TileColor = CurrentColor;
+
                 canChangeColor = true;
             }
 
@@ -186,6 +190,7 @@ public class MapGenerator : MonoBehaviour
 
         
         ball.GetComponent<ColorBall>().ChangeColor();
+        ball.GetComponent<ColorBall>().BallColor = ballColor;
 
         CurrentColor = ballColor;
     }

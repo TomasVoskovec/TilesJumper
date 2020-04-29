@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880df80b883abed4aa71da41b69b609c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EmitParticles: {fileID: 3511904576974484784}
+  CollectParticles: {fileID: 850305943392459327, guid: 7b3297392acc39344b0501b1ff557cbc,
+    type: 3}
+  BallColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &3511904576974484787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4817,7 +4821,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: aebc2fcd4311946738874768112cd326, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

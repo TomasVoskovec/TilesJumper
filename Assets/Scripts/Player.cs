@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
     public int Jumps;
     public int JumpBoostsinARow;
     public float Speed;
+    public Color CurrentPlayerColor;
 
     void Start()
     {
@@ -247,7 +248,7 @@ public class Player : MonoBehaviour
                 // Start the push animation on the tile below the player
                 hit.collider.gameObject.GetComponent<Animator>().SetTrigger("pushed");
 
-                if (hit.collider.gameObject.GetComponent<MeshRenderer>().material.color != gameObject.GetComponentInChildren<MeshRenderer>().material.color)
+                if (hit.collider.gameObject.GetComponent<Tile>().TileColor != CurrentPlayerColor)
                 {
                     if (!Manager.Immortality)
                     {
@@ -258,10 +259,14 @@ public class Player : MonoBehaviour
                         else
                         {
                             // Set color of Player
-                            gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                            var block = new MaterialPropertyBlock();
+                            block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<Tile>().TileColor);
+                            GetComponentInChildren<Renderer>().SetPropertyBlock(block);
+                            CurrentPlayerColor = hit.collider.gameObject.GetComponent<Tile>().TileColor;
+
                             // Set color of Jump Boost particles
                             ParticleSystem.MainModule settings = BoostParticles.main;
-                            Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                            Color color = CurrentPlayerColor;
                             color.a = 1;
                             settings.startColor = new ParticleSystem.MinMaxGradient(color);
                         }
@@ -423,16 +428,20 @@ public class Player : MonoBehaviour
 
                 var block = new MaterialPropertyBlock();
 
-                // You can look up the property by ID instead of the string to be more efficient.
-                block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<MeshRenderer>().material.color);
-
-                // You can cache a reference to the renderer to avoid searching for it.
-                GetComponentInChildren<Renderer>().SetPropertyBlock(block);
                 
+                block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<ColorBall>().BallColor);
+                
+
+                
+                GetComponentInChildren<Renderer>().SetPropertyBlock(block);
+                CurrentPlayerColor = hit.collider.gameObject.GetComponent<ColorBall>().BallColor;
+
+
                 ParticleSystem.MainModule settings = BoostParticles.main;
-                Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+                Color color = hit.collider.gameObject.GetComponent<ColorBall>().BallColor;
                 color.a = 1;
                 settings.startColor = new ParticleSystem.MinMaxGradient(color);
+                hit.collider.gameObject.GetComponent<ColorBall>().CollectParticlesEmit();
                 Destroy(hit.collider.gameObject);
             }
         }
