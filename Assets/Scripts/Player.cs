@@ -103,7 +103,8 @@ public class Player : MonoBehaviour
         mapGenerator = Map.GetComponent<MapGenerator>();
 
         // Set start color of player
-        gameObject.GetComponentInChildren<MeshRenderer>().material.color = mapGenerator.AvailableColors[0];
+        CurrentPlayerColor = mapGenerator.AvailableColors[0];
+        gameObject.GetComponentInChildren<MeshRenderer>().material.color = CurrentPlayerColor;
 
         // Update score
         UpdateUI();
