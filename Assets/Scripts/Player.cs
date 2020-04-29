@@ -416,7 +416,15 @@ public class Player : MonoBehaviour
             {
                 CollectedColorChangers++;
 
-                gameObject.GetComponentInChildren<MeshRenderer>().material.color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
+
+                var block = new MaterialPropertyBlock();
+
+                // You can look up the property by ID instead of the string to be more efficient.
+                block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<MeshRenderer>().material.color);
+
+                // You can cache a reference to the renderer to avoid searching for it.
+                GetComponentInChildren<Renderer>().SetPropertyBlock(block);
+                
                 ParticleSystem.MainModule settings = BoostParticles.main;
                 Color color = hit.collider.gameObject.GetComponent<MeshRenderer>().material.color;
                 color.a = 1;
