@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public int HighScore;
     public int JumpBoosts;
     public int OverallJumpBoosts;
+    public int Deaths;
+    public int CollectedCollorChangers;
     public List<int> CompletedChallanges;
     public List<Skin> UnlockedSkins;
     public List<Challenge> ChallengeProgress;
@@ -284,20 +286,20 @@ public class Player : MonoBehaviour
         ChallengeManager.ResetChallengeProgress(Challenge.GroupName.ScoreJumper);
         updatePlayerData();
 
-        
+        // Update deaths
+        Deaths++;
 
         // Show end menu and restart game
         End = true;
         GetComponentInChildren<Animator>().SetTrigger("End");
         Manager.GameMusic.Stop();
         Manager.EndMusic.Play();
+
         // Save game data
         GameDataManager.Save(this);
+
         // Restart game
         Manager.RestartGame(isHighScore);
-
-        
-        
     }
 
     void updatePlayerData()
@@ -333,7 +335,8 @@ public class Player : MonoBehaviour
             this.HighScore = loadedData.HighScore;
             this.OverallJumpBoosts = loadedData.OverallJumpBoosts;
             this.CurrentSkin = loadCurrentSkin(loadedData.CurrentSkinID);
-            loadSkin();
+            this.Deaths = loadedData.Deaths;
+            this.CollectedCollorChangers = loadedData.CollectedCollorChangers;
             this.CompletedChallanges = (isNullOrEmpty(loadedData.CompletedChallenges)) ? new List<int>() : new List<int>(loadedData.CompletedChallenges);
             this.UnlockedSkins = loadUnlockedSkins(loadedData.UnlockedSkins);
             this.ChallengeProgress = loadChallengeProgress(loadedData.ChallengeProgress);
@@ -350,6 +353,7 @@ public class Player : MonoBehaviour
                 currentSkin = skin;
             }
         }
+        loadSkin(currentSkin);
 
         return currentSkin;
     }
@@ -379,10 +383,10 @@ public class Player : MonoBehaviour
         return skins;
     }
 
-    void loadSkin()
+    void loadSkin(Skin skin)
     {
-        GetComponentInChildren<MeshFilter>().mesh = CurrentSkin.SkinMesh;
-        GetComponentInChildren<MeshRenderer>().material = CurrentSkin.SkinMaterial;
+        GetComponentInChildren<MeshFilter>().mesh = skin.SkinMesh;
+        GetComponentInChildren<MeshRenderer>().material = skin.SkinMaterial;
     }
 
     List<Challenge> loadChallengeProgress(Dictionary<int, int> challengeProgress)

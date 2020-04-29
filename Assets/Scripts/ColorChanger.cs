@@ -27,6 +27,7 @@ public class ColorChanger : MonoBehaviour
 
         if(collider == player)
         {
+            player.GetComponent<Player>().CollectedCollorChangers++;
             playerRend.material.color = rend.material.color;
         }
     }
