@@ -2518,7 +2518,7 @@ MonoBehaviour:
   Skins:
   - ID: 0
     Name: Sphere
-    SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
+    SkinMaterial: {fileID: 2100000, guid: fd6d912ff3cb90b438cbdee21eb03c4e, type: 2}
     SkinMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
   - ID: 1
@@ -2528,7 +2528,7 @@ MonoBehaviour:
     Price: 100
   - ID: 2
     Name: Cylinder
-    SkinMaterial: {fileID: 2100000, guid: fd6d912ff3cb90b438cbdee21eb03c4e, type: 2}
+    SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
     SkinMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
 --- !u!4 &314061795
