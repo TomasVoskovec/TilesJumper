@@ -20,6 +20,11 @@ public class Challenge
     {
         JumpMaster,
         DeathJumper,
-        ScoreJumper
+        ScoreJumper,
+        BallMaster,
+        ChallengeBeginner,
+        ChallengeAmateur,
+        ChallengePro,
+        ChallengeMaster
     }
 }

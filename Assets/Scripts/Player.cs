@@ -260,7 +260,7 @@ public class Player : MonoBehaviour
                         {
                             // Set color of Player
                             var block = new MaterialPropertyBlock();
-                            block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<Tile>().TileColor);
+                            block.SetColor("_Color", hit.collider.gameObject.GetComponent<Tile>().TileColor);
                             GetComponentInChildren<Renderer>().SetPropertyBlock(block);
                             CurrentPlayerColor = hit.collider.gameObject.GetComponent<Tile>().TileColor;
 
@@ -429,7 +429,7 @@ public class Player : MonoBehaviour
                 var block = new MaterialPropertyBlock();
 
                 
-                block.SetColor("_BaseColor", hit.collider.gameObject.GetComponent<ColorBall>().BallColor);
+                block.SetColor("_Color", hit.collider.gameObject.GetComponent<ColorBall>().BallColor);
                 
 
                 
@@ -442,6 +442,7 @@ public class Player : MonoBehaviour
                 color.a = 1;
                 settings.startColor = new ParticleSystem.MinMaxGradient(color);
                 hit.collider.gameObject.GetComponent<ColorBall>().CollectParticlesEmit();
+                ChallengeManager.ProgressChallenge(Challenge.GroupName.BallMaster);
                 Destroy(hit.collider.gameObject);
             }
         }

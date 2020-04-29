@@ -833,7 +833,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130859510}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.02903151, y: 0.96858186, z: -0.13660051, w: 0.20578325}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2528,7 +2528,7 @@ MonoBehaviour:
     Price: 100
   - ID: 2
     Name: Cylinder
-    SkinMaterial: {fileID: 2100000, guid: 904bb1418195202438a8b7af85a11096, type: 2}
+    SkinMaterial: {fileID: 2100000, guid: fd6d912ff3cb90b438cbdee21eb03c4e, type: 2}
     SkinMesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     Price: 100
 --- !u!4 &314061795
@@ -2943,7 +2943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rostore Data
+  m_text: Restore Data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08875b585224fec488874b5671fa0544, type: 2}
   m_sharedMaterial: {fileID: 4993299795623650454, guid: 08875b585224fec488874b5671fa0544,
@@ -6931,7 +6931,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.029031511, y: 0.96858186, z: -0.13660051, w: 0.20578326}
+  m_LocalRotation: {x: 0.02903151, y: 0.96858186, z: -0.13660051, w: 0.20578325}
   m_LocalPosition: {x: -2.39, y: 2.17, z: 2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7812,6 +7812,42 @@ MonoBehaviour:
     Name: Score Jumper
     Difficulty: 4
     Description: Reach score 1000 or over
+    Reward: 1200
+    Progress: 0
+    Goal: 1000
+    Completed: 0
+  - ID: 12
+    Group: 3
+    Name: Ball Master
+    Difficulty: 1
+    Description: Collect 10 Colorballs
+    Reward: 200
+    Progress: 0
+    Goal: 10
+    Completed: 0
+  - ID: 13
+    Group: 3
+    Name: Ball Master
+    Difficulty: 2
+    Description: Collect 50 Colorballs
+    Reward: 400
+    Progress: 0
+    Goal: 50
+    Completed: 0
+  - ID: 14
+    Group: 3
+    Name: Ball Master
+    Difficulty: 3
+    Description: Collect 100 Colorballs
+    Reward: 800
+    Progress: 0
+    Goal: 100
+    Completed: 0
+  - ID: 15
+    Group: 3
+    Name: Ball Master
+    Difficulty: 4
+    Description: Collect 1000 Colorballs
     Reward: 1200
     Progress: 0
     Goal: 1000
