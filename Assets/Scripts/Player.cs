@@ -178,6 +178,7 @@ public class Player : MonoBehaviour
                 endPossitionn.z += LerpDistance * 2;
                 Points += 2;
                 JumpBoosts++;
+                OverallJumpBoosts++;
                 JumpBoostsinARow++;
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.JumpMaster);
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
@@ -304,8 +305,6 @@ public class Player : MonoBehaviour
 
     void updatePlayerData()
     {
-        OverallJumpBoosts += JumpBoosts;
-
         // Reset in one game challenges
         ChallengeManager.ResetChallengeProgress(0);
         ChallengeProgress = updateChallengeProgress();
@@ -324,6 +323,7 @@ public class Player : MonoBehaviour
         return challengeProgress;
     }
 
+    // Load game data saved in .bin file
     void loadGameData()
     {
         GameData loadedData = GameDataManager.Load();
@@ -343,6 +343,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Load skin from game skins
     Skin loadCurrentSkin(int skinId)
     {
         Skin currentSkin = new Skin();
@@ -363,6 +364,7 @@ public class Player : MonoBehaviour
         return (array == null || array.Length == 0);
     }
 
+    // Load unlocked skins from game data (by skin IDs)
     List<Skin> loadUnlockedSkins(int[] skinsId)
     {
         List<Skin> skins = new List<Skin>();
@@ -383,12 +385,14 @@ public class Player : MonoBehaviour
         return skins;
     }
 
+    // Load current skin (change player mesh and material)
     void loadSkin(Skin skin)
     {
         GetComponentInChildren<MeshFilter>().mesh = skin.SkinMesh;
         GetComponentInChildren<MeshRenderer>().material = skin.SkinMaterial;
     }
 
+    // Load challenge progres from game data (int dictionary to challenge class)
     List<Challenge> loadChallengeProgress(Dictionary<int, int> challengeProgress)
     {
         List<Challenge> challenges = new List<Challenge>();
