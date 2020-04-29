@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1694840977106117744
+--- !u!114 &-7940357608659393630
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,10 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Metal_Player
-  m_Shader: {fileID: -6465566751694194690, guid: 33d38bcbe9e867c4f9b3bba0ec509794,
-    type: 3}
-  m_ShaderKeywords: HARD_SHADING_ON
+  m_Name: Holo_player
+  m_Shader: {fileID: 4800000, guid: d3525cc26dee0e944b2a506b290f9cef, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -33,23 +32,19 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_153BB4A9:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_48882336:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -61,11 +56,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
+    - _Maintexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalTex:
+    - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -73,15 +68,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _OcclusionTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SmoothnessTex:
+    - _Secondarytexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -89,47 +76,72 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_E8C87502_Out_0:
-        m_Texture: {fileID: 2800000, guid: bf91a9f94ae4348b09a32bb9c02a7b4d, type: 3}
+    - _texcoord:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - HARD_SHADING: 1
-    - Vector1_962926F1: 1.1
+    - Vector1_6DC2C68C: 2.47
     - _AlphaClip: 0
-    - _BacklightAmount: 2.3
+    - _Bias: 0
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DabsRotation: 15
-    - _DabsTiling: 10
-    - _DetailNormalMapScale: 1
+    - _Distortionscale: 1
+    - _Distortionspeed: 1
     - _DstBlend: 0
+    - _Enabledistortion: 0
+    - _Enablenoise: 0
+    - _Enablepulsation: 0
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 1
-    - _Glossiness: 0.605
-    - _GlossyReflections: 1
-    - _Metallic: 0.659
-    - _Mode: 0
-    - _NormalMult: 1
-    - _OcclusionMult: 1
+    - _Extraroughness: 0
+    - _Globalopacity: 1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Innerfresnelintensity: 0
+    - _Invertmaintexture: 0
+    - _Invertsecondarytexture: 0
+    - _Maintextureintensity: 1
+    - _Metallic: 0
+    - _Noisescale: 50
     - _OcclusionStrength: 1
-    - _Parallax: 0.02
+    - _Outerfresnelintensity: 1
+    - _Power: 2
+    - _Pulseamplitude: 1
+    - _Pulsefrequency: 3
+    - _Pulseoffset: 0
+    - _Pulsephase: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.605
+    - _Scale: 1
+    - _Secondarytextureintensity: 1
+    - _Sharpennoise: 0
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _UVSec: 0
+    - _TessMax: 25
+    - _TessMin: 10
+    - _TessPhongStrength: 0.5
+    - _TessValue: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0, b: 0, a: 1}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - Color_19C6C157: {r: 0.4438857, g: 0.7075472, b: 0.4713053, a: 0}
+    - Color_B23AA66E: {r: 2, g: 1.043137, b: 0.2196078, a: 0}
+    - Color_E448CF9F: {r: 1.498039, g: 0.5411765, b: 0, a: 0}
+    - Vector2_6925FF1E: {r: 1, g: 3, b: 0, a: 0}
+    - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Edgecolor: {r: 0.7941176, g: 0.1284602, b: 0.1284602, a: 0.666}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Maincolor: {r: 0.7941176, g: 0.1284602, b: 0.1284602, a: 0.666}
+    - _Mainpanningspeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Noisespeed: {r: 0, g: 0, b: 0, a: 0}
+    - _Secondarycolor: {r: 0, g: 0, b: 0, a: 0}
+    - _Secondarypanningspeed: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Specular: {r: 0.2075472, g: 0.2075472, b: 0.2075472, a: 0}
-    - _TextureTiling: {r: 1, g: 1, b: 0, a: 0}
