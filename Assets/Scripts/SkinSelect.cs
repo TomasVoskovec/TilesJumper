@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Assets.Scripts.Models;
-
+using UnityEngine.Rendering.PostProcessing;
 public class SkinSelect : MonoBehaviour
 {
     [Header("Public references")]
@@ -13,6 +13,7 @@ public class SkinSelect : MonoBehaviour
     public ParticleSystemRenderer Trail;
     public GameObject MainMenu;
     public GameObject ShowLight;
+    
     [Header("UI")]
     public GameObject SkinSelectCam;
     public GameObject SkinSelectUI;
@@ -37,10 +38,12 @@ public class SkinSelect : MonoBehaviour
     public List<Skin> Skins;
 
     int selectedSkinIndex;
+   
 
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+       
     }
 
     
