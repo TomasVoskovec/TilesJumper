@@ -10,6 +10,7 @@ public class DeathMenu : MonoBehaviour
     public TextMeshProUGUI BestScore_text;
     public GameObject HighScoreWarning;
     private Player player;
+    public GameManager Manager;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -37,7 +38,9 @@ public class DeathMenu : MonoBehaviour
     }
     public void Restart()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadSceneAsync(scene);
+        Manager.BlackScreenFade("fadein");
+
+        //int scene = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadSceneAsync(scene);
     }
 }

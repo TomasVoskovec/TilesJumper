@@ -10,6 +10,7 @@ public class SkinSelect : MonoBehaviour
 {
     [Header("Public references")]
     public Player player;
+    public ParticleSystemRenderer Trail;
     public GameObject MainMenu;
     public GameObject ShowLight;
     [Header("UI")]
@@ -18,6 +19,7 @@ public class SkinSelect : MonoBehaviour
     public GameObject Points_UI;
     public GameObject LockImage;
     public TextMeshProUGUI Name;
+    public TextMeshProUGUI Rarity;
     public GameObject PriceGameobject;
     public TextMeshProUGUI Price_text;
     public GameObject ActivatedSkinImage;
@@ -28,6 +30,7 @@ public class SkinSelect : MonoBehaviour
     [Space]
     private Mesh currentPlayerMesh;
     private Material currentPlayerMaterial;
+    public Material currentTrailMaterial;
     private GameManager manager;
     public Skin SelectedSkin;
     public bool SkinSelectionActive;
@@ -133,7 +136,10 @@ public class SkinSelect : MonoBehaviour
             
             currentPlayerMesh = player.GetComponentInChildren<MeshFilter>().mesh;
             currentPlayerMaterial = player.GetComponentInChildren<MeshRenderer>().material;
+            currentTrailMaterial = Trail.material;
             // Display skin name
+            Rarity.text = SelectedSkin.Rarity.ToString();
+            Rarity.color = rarityCheck(SelectedSkin.Rarity.ToString());
             Name.text = SelectedSkin.Name;
             player.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
         }
@@ -141,6 +147,7 @@ public class SkinSelect : MonoBehaviour
         {
             player.GetComponentInChildren<MeshFilter>().mesh = currentPlayerMesh;
             player.GetComponentInChildren<MeshRenderer>().material = currentPlayerMaterial;
+            Trail.material = currentTrailMaterial;
         }
     }
     // Show next skin
@@ -150,6 +157,8 @@ public class SkinSelect : MonoBehaviour
         player.gameObject.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
         player.GetComponentInChildren<MeshRenderer>().material = SelectedSkin.SkinMaterial;
         skinCheck();
+        Rarity.text = SelectedSkin.Rarity.ToString();
+        Rarity.color = rarityCheck(SelectedSkin.Rarity.ToString());
         Name.text = SelectedSkin.Name;
     }
     // Show previous skin
@@ -159,6 +168,8 @@ public class SkinSelect : MonoBehaviour
         player.gameObject.GetComponentInChildren<MeshFilter>().mesh = SelectedSkin.SkinMesh;
         player.GetComponentInChildren<MeshRenderer>().material = SelectedSkin.SkinMaterial;
         skinCheck();
+        Rarity.text = SelectedSkin.Rarity.ToString();
+        Rarity.color = rarityCheck(SelectedSkin.Rarity.ToString());
         Name.text = SelectedSkin.Name;
     }
 
@@ -167,6 +178,7 @@ public class SkinSelect : MonoBehaviour
     {
         currentPlayerMesh = SelectedSkin.SkinMesh;
         currentPlayerMaterial = SelectedSkin.SkinMaterial;
+        currentTrailMaterial = SelectedSkin.TrailMaterial;
         player.CurrentSkin = SelectedSkin;
         skinCheck();
 
@@ -183,6 +195,25 @@ public class SkinSelect : MonoBehaviour
             manager.Remove(SelectedSkin.Price);
 
             GameDataManager.Save(player);
+        }
+    }
+    private Color rarityCheck(string value)
+    {
+        if (value == "Basic")
+        {
+            return Color.white;
+        }
+        else if (value == "Rare")
+        {
+            return Color.cyan;
+        }
+        else if (value == "Mythic")
+        {
+            return Color.yellow;
+        }
+        else
+        {
+            return Color.white;
         }
     }
 

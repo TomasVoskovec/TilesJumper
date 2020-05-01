@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     [Header("Particles")]
     public GameObject SmokeParticle;
     public ParticleSystem BoostParticles;
+    public ParticleSystemRenderer BoostRenderer;
 
     [Space]
     [Header("Skin")]
@@ -398,6 +399,7 @@ public class Player : MonoBehaviour
     {
         GetComponentInChildren<MeshFilter>().mesh = skin.SkinMesh;
         GetComponentInChildren<MeshRenderer>().material = skin.SkinMaterial;
+        BoostRenderer.material = skin.TrailMaterial;
     }
 
     // Load challenge progres from game data (int dictionary to challenge class)

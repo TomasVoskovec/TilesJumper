@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [Header("Cheats")]
     public bool Immortality;
     [Space]
+    [Header("Public references")]
+    public GameObject BlackScreen;
+    [Space]
     [Header("Audio")]
     
     public AudioSource GameMusic;
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         UpdateValues();
         loadData();
+        BlackScreenFade("fadeout");
     }
 
     void loadData()
@@ -113,12 +117,18 @@ public class GameManager : MonoBehaviour
     public void RestoreGameData()
     {
         GameDataManager.Restore();
-        restart();
+        Restart();
     }
 
-    void restart()
+    public void Restart()
     {
         int scene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(scene);
+    }
+
+    public void BlackScreenFade(string fade)
+    {
+        BlackScreen.SetActive(true);
+        BlackScreen.GetComponent<Animator>().SetTrigger(fade);
     }
 }

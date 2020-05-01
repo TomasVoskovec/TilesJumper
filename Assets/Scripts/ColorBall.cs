@@ -29,6 +29,7 @@ public class ColorBall : MonoBehaviour
         settings.startColor = new ParticleSystem.MinMaxGradient(color);
 
         ParticleSystem.MainModule settings2 = CollectParticles.main;
+        
         settings2.startColor = new ParticleSystem.MinMaxGradient(color);
         // Change color of the light to the color of the colorball
         //ballLight.color = color;
