@@ -59,15 +59,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space) && TutorialActive && !MainMenuActive)
-        {
-
-            player.JumpBoost = true;
-            player.GetComponentInChildren<Animator>().enabled = true;
-            TutorialBlock2.SetActive(false);
-            TutorialBlock4.SetActive(false);
-
-        }
+        
     }
 
     public void Tutorial()
@@ -78,12 +70,16 @@ public class GameManager : MonoBehaviour
         TutorialActive = true;
         TutorialPause = true;
     }
-    public void TutorialConfirm()
+    public void TutorialConfirm(bool value)
     {
 
         player.GetComponentInChildren<Animator>().enabled = true;
         TutorialBlock4.SetActive(false);
-        TutorialPause = false;
+        TutorialBlock2.SetActive(false);
+        if (value)
+        {
+            TutorialPause = false;
+        }
     }
     public void ColorBallTutorial()
     {
