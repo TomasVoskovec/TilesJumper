@@ -35,6 +35,8 @@ public class Menu : MonoBehaviour
         manager.MenuMusic.Stop();
         manager.GameMusic.Play();
         manager.MainMenuActive = false;
+        manager.TutorialBlock1.SetActive(false);
+        manager.GameTutorial();
 
     }
     

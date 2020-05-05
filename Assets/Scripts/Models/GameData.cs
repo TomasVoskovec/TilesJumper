@@ -10,6 +10,8 @@ namespace Assets.Scripts.Models
     public class GameData
     {
         public bool FirstGame { get; set; }
+        public bool TutorialActive { get; set; }
+        public bool TutorialPause { get; set; }
         public int HighScore { get; set; }
         public int GoldenTiles { get; set; }
         public int OverallJumpBoosts { get; set; }
@@ -23,6 +25,8 @@ namespace Assets.Scripts.Models
         public GameData(Player player)
         {
             this.FirstGame = player.FirstGame;
+            this.TutorialPause = player.Manager.TutorialPause;
+            this.TutorialActive = player.Manager.TutorialActive;
             this.HighScore = player.HighScore;
             this.GoldenTiles = player.GoldenTiles;
             this.OverallJumpBoosts = player.OverallJumpBoosts;
@@ -37,6 +41,8 @@ namespace Assets.Scripts.Models
         public GameData()
         {
             this.FirstGame = true;
+            this.TutorialActive = true;
+            this.TutorialPause = true;
             this.HighScore = 0;
             this.GoldenTiles = 0;
             this.OverallJumpBoosts = 0;

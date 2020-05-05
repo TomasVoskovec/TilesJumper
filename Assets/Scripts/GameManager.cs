@@ -15,13 +15,22 @@ public class GameManager : MonoBehaviour
     public int GoldenTiles;
     public GameObject GoldenTiles_UI;
     public float GoldenTilesAnimationDuration = 0.01f;
-
+    public bool TutorialActive;
+    public bool TutorialPause;
     [Space]
     [Header("Cheats")]
     public bool Immortality;
     [Space]
     [Header("Public references")]
     public GameObject BlackScreen;
+    public GameObject MainMenu;
+    public GameObject GoldenTilesBlock;
+    [Space]
+    [Header("Tutorials")]
+    public GameObject TutorialBlock1;
+    public GameObject TutorialBlock2;
+    public GameObject TutorialBlock3;
+    public GameObject TutorialBlock4;
     [Space]
     [Header("Audio")]
     
@@ -38,17 +47,67 @@ public class GameManager : MonoBehaviour
         UpdateValues();
         loadData();
         BlackScreenFade("fadeout");
+        
     }
 
     void loadData()
     {
         GoldenTiles = player.GoldenTiles;
+        
     }
 
     
     void Update()
     {
-        
+        if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space) && TutorialActive && !MainMenuActive)
+        {
+
+            player.JumpBoost = true;
+            player.GetComponentInChildren<Animator>().enabled = true;
+            TutorialBlock2.SetActive(false);
+            TutorialBlock4.SetActive(false);
+
+        }
+    }
+
+    public void Tutorial()
+    {
+        MainMenu.SetActive(false);
+        GoldenTilesBlock.SetActive(false);
+        TutorialBlock1.SetActive(true);
+        TutorialActive = true;
+        TutorialPause = true;
+    }
+    public void TutorialConfirm()
+    {
+
+        player.GetComponentInChildren<Animator>().enabled = true;
+        TutorialBlock4.SetActive(false);
+        TutorialPause = false;
+    }
+    public void ColorBallTutorial()
+    {
+        if (TutorialActive && TutorialPause)
+        {
+            TutorialBlock4.SetActive(true);
+            player.GetComponentInChildren<Animator>().enabled = false;
+        }
+    }
+    public void GameTutorial()
+    {
+        if (!MainMenuActive && TutorialActive)
+        {
+            player.JumpBoost = true;
+            TutorialBlock2.SetActive(true);
+            player.GetComponentInChildren<Animator>().enabled = false;
+
+            
+        }
+    }
+    public void FinishTutorial()
+    {
+        TutorialActive = false;
+        TutorialBlock3.SetActive(false);
     }
 
     public void UpdateValues()

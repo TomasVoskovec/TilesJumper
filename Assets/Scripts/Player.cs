@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     [Space]
     [Header("Particles")]
     public GameObject SmokeParticle;
+    public GameObject BoostSmokeParticle;
     public ParticleSystem BoostParticles;
     public ParticleSystemRenderer BoostRenderer;
 
@@ -122,7 +123,10 @@ public class Player : MonoBehaviour
         // Load UI values
         Manager.LoadValues();
 
-        
+        if (Manager.TutorialActive && !Manager.TutorialPause)
+        {
+            Manager.TutorialBlock3.SetActive(true);
+        }
     }
 
     private void Update()
@@ -166,8 +170,9 @@ public class Player : MonoBehaviour
         UnlockedSkins.Add(skinSelect.Skins[0]);
 
         FirstGame = false;
-
+        
         GameDataManager.Save(this);
+        Manager.Tutorial();
     }
 
     // Starts the Lerping animation
@@ -189,6 +194,7 @@ public class Player : MonoBehaviour
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
                 BoostParticles.Play();
+                Instantiate(BoostSmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
             }
             else
             {
@@ -198,6 +204,7 @@ public class Player : MonoBehaviour
                 ChallengeManager.ResetChallengeProgress(Challenge.GroupName.JumpMaster);
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.ScoreJumper);
                 JumpBoostsinARow = 0;
+                Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
             }
             JumpHeight = 1;
             JumpBoost = false;
@@ -236,7 +243,7 @@ public class Player : MonoBehaviour
     // Generate smoke particles under player
     public void GenerateParticles()
     {
-        Instantiate(SmokeParticle, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), SmokeParticle.transform.rotation);
+        
     }
 
     // Push tile down after player colide with it
@@ -339,6 +346,8 @@ public class Player : MonoBehaviour
 
         if(loadedData != null)
         {
+            this.Manager.TutorialActive = loadedData.TutorialActive;
+            this.Manager.TutorialPause = loadedData.TutorialPause;
             this.FirstGame = loadedData.FirstGame;
             this.GoldenTiles = loadedData.GoldenTiles;
             this.HighScore = loadedData.HighScore;
@@ -449,6 +458,9 @@ public class Player : MonoBehaviour
                 hit.collider.gameObject.GetComponent<ColorBall>().CollectParticlesEmit();
                 ChallengeManager.ProgressChallenge(Challenge.GroupName.BallMaster);
                 Destroy(hit.collider.gameObject);
+
+                // ColorBall Tutorial
+                Manager.ColorBallTutorial();
             }
         }
     }
