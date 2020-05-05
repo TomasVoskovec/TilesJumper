@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         if (!Manager.MainMenuActive)
         {
 
-            if (Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetKeyDown(KeyCode.Space))
             {
 
                 JumpHeight = 2;
