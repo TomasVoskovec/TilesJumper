@@ -1,30 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class StreamVideo : MonoBehaviour
 {
-    public RawImage raw;
+    
     public VideoPlayer Video;
-    public AudioSource Audio;
+    
+    
     void Start()
     {
-        StartCoroutine(PlayVideo());
+       
+        Video.loopPointReached += loadScene;
     }
 
-    IEnumerator PlayVideo()
+    void loadScene(VideoPlayer video)
     {
-        Video.Prepare();
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
-        while(!Video.isPrepared)
-        {
-            yield return waitForSeconds;
-            break;
-        }
-        raw.texture = Video.texture;
-        Video.Play();
-        Audio.Play();
+        SceneManager.LoadScene("Main");
+
     }
+
+    
 }
