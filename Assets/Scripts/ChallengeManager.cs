@@ -12,7 +12,8 @@ public class ChallengeManager : MonoBehaviour
     public List<Challenge> Challenges;
     [Space]
     public GameObject Challenge_UI;
-    public GameObject MainMenu_UI;
+    public GameObject MainMenu_UILogo;
+    public GameObject MainMenu_UIStartButton;
     [Space]
     public GameObject Challenge_prefab;
     public GameObject Content_parent;
@@ -20,12 +21,15 @@ public class ChallengeManager : MonoBehaviour
     [Header("PopUp")]
     public GameObject PopUp;
     public TextMeshProUGUI PopUp_name;
+    public TextMeshProUGUI PopUp_desc;
     public Image PopUp_bar;
     public TextMeshProUGUI PopUp_progress;
 
     private Player player;
 
-    private bool PopInProgress;
+    private int popUpQueue;
+    
+    private bool popInProgress;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -41,6 +45,13 @@ public class ChallengeManager : MonoBehaviour
     {
         StartCoroutine(Progress(group));
     }
+    IEnumerator popUpTimer()
+    {
+        yield return new WaitForSeconds(3);
+
+        PopUp.GetComponent<Animator>().SetTrigger("hide");
+        popInProgress = false;
+    }
 
     IEnumerator Progress(Challenge.GroupName group)
     {
@@ -51,21 +62,21 @@ public class ChallengeManager : MonoBehaviour
                 if (challenge.Progress != challenge.Goal)
                 {
                     challenge.Progress++;
-                    if (!PopInProgress)
+                    if (!popInProgress)
                     {
                         
                         if (challenge.Progress == challenge.Goal)
                         {
-                            PopInProgress = true;
+                            popInProgress = true;
 
                             PopUp_name.text = challenge.Name;
+                            PopUp_desc.text = challenge.Description;
                             PopUp_bar.fillAmount = (float)challenge.Progress / (float)challenge.Goal;
                             PopUp_progress.text = challenge.Progress + "/" + challenge.Goal;
                             PopUp.GetComponent<Animator>().SetTrigger("show");
+                            StartCoroutine(popUpTimer());
                             yield return new WaitForSeconds(1);
                             
-                            PopUp.GetComponent<Animator>().SetTrigger("hide");
-                            PopInProgress = false;
                         }
                     }
                 }
@@ -83,9 +94,9 @@ public class ChallengeManager : MonoBehaviour
                 {
 
                     challenge.Progress = 0;
-                    PopInProgress = false;
-                    PopUp.GetComponent<Animator>().SetTrigger("hide");
-                    StopAllCoroutines();
+                    //popInProgress = false;
+                    //PopUp.GetComponent<Animator>().SetTrigger("hide");
+                    
                 }
 
             }
@@ -93,15 +104,22 @@ public class ChallengeManager : MonoBehaviour
     }
     public void ShowChallenge(bool enable)
     {
-        Challenge_UI.SetActive(enable);
-        MainMenu_UI.SetActive(!enable);
+        //Challenge_UI.SetActive(enable);
+
+        //MainMenu_UI.SetActive(!enable);
+
+        Challenge_UI.GetComponent<Animator>().SetTrigger("move");
+        MainMenu_UILogo.GetComponent<Animator>().SetTrigger("move");
+        MainMenu_UIStartButton.GetComponent<Animator>().SetTrigger("move");
 
         if (enable)
         {
             LoadChallenges();
+            
         }
         else
         {
+           
             foreach (Transform child in Content_parent.transform)
             {
                 GameObject.Destroy(child.gameObject);

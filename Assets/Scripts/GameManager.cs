@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
     public AudioSource EndMusic;
 
     Player player;
-
+    ChallengeManager challengeManager;
     void Start()
     {
         MainMenuActive = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        challengeManager = GetComponent<ChallengeManager>();
         UpdateValues();
         loadData();
         BlackScreenFade("fadeout");
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
     {
         TutorialActive = false;
         TutorialBlock3.SetActive(false);
+        challengeManager.ProgressChallenge(Challenge.GroupName.FirstSteps);
     }
 
     public void UpdateValues()

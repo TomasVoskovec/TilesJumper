@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         if (!Manager.MainMenuActive)
         {
 
-            if (Input.GetTouch(0).phase == TouchPhase.Began || Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetTouch(0).phase == TouchPhase.Began)
             {
 
                 JumpHeight = 2;
@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
         // Save game data
         GameDataManager.Save(this);
 
-        // Restart game
+        
         Manager.RestartGame(isHighScore);
     }
 

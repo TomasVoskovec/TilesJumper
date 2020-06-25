@@ -33,6 +33,7 @@ public class SkinSelect : MonoBehaviour
     private Material currentPlayerMaterial;
     public Material currentTrailMaterial;
     private GameManager manager;
+    private ChallengeManager challengeManager;
     public Skin SelectedSkin;
     public bool SkinSelectionActive;
     public List<Skin> Skins;
@@ -43,7 +44,8 @@ public class SkinSelect : MonoBehaviour
     void Start()
     {
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-       
+        challengeManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ChallengeManager>();
+
     }
 
     
@@ -191,6 +193,10 @@ public class SkinSelect : MonoBehaviour
     {
         if (player.GoldenTiles >= SelectedSkin.Price)
         {
+            if (player.UnlockedSkins.Count == 1)
+            {
+                challengeManager.ProgressChallenge(Challenge.GroupName.FirstSteps);
+            }
             player.UnlockedSkins.Add(SelectedSkin);
 
             LockImage.GetComponent<Animator>().SetTrigger("fade");

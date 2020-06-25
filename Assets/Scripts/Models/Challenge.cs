@@ -25,6 +25,7 @@ public class Challenge
         ChallengeBeginner,
         ChallengeAmateur,
         ChallengePro,
-        ChallengeMaster
+        ChallengeMaster,
+        FirstSteps
     }
 }
