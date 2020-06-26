@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Game")]
     public int GoldenTiles;
     public GameObject GoldenTiles_UI;
+    public GameObject HighScore_UI;
     public float GoldenTilesAnimationDuration = 0.01f;
     public bool TutorialActive;
     public bool TutorialPause;
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
     void loadData()
     {
         GoldenTiles = player.GoldenTiles;
+        
         
     }
 
@@ -116,6 +118,7 @@ public class GameManager : MonoBehaviour
     public void LoadValues()
     {
         GoldenTiles_UI.GetComponent<TextMeshProUGUI>().text = player.GoldenTiles.ToString();
+        HighScore_UI.GetComponent<TextMeshProUGUI>().text = player.HighScore.ToString();
     }
 
     public void RestartGame(bool isHighScore)
@@ -128,7 +131,7 @@ public class GameManager : MonoBehaviour
         GoldenTiles = player.GoldenTiles;
         player.GoldenTiles += value;
         GameDataManager.Save(player);
-        GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
+        //GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
         StartCoroutine(AddGoldenTilesAnim());
     }
@@ -137,7 +140,7 @@ public class GameManager : MonoBehaviour
         GoldenTiles = player.GoldenTiles;
         player.GoldenTiles -= value;
         GameDataManager.Save(player);
-        GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
+        //GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Add");
         //StopAllCoroutines();
         StartCoroutine(RemoveGoldenTiles());
     }
@@ -152,7 +155,7 @@ public class GameManager : MonoBehaviour
         if (GoldenTiles == player.GoldenTiles)
         {
             UpdateValues();
-            GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
+            //GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
 
     }
@@ -167,7 +170,7 @@ public class GameManager : MonoBehaviour
         if (GoldenTiles == player.GoldenTiles)
         {
             UpdateValues();
-            GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
+            //GoldenTiles_UI.GetComponent<Animator>().SetTrigger("Exit");
         }
     }
 
