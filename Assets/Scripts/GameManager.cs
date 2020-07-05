@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject BlackScreen;
     public GameObject MainMenu;
     public GameObject GoldenTilesBlock;
+    public GameObject HighScoreBlock;
     [Space]
     [Header("Tutorials")]
     public GameObject TutorialBlock1;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     {
         MainMenu.SetActive(false);
         GoldenTilesBlock.SetActive(false);
+        HighScoreBlock.SetActive(false);
         TutorialBlock1.SetActive(true);
         TutorialActive = true;
         TutorialPause = true;

@@ -265,7 +265,14 @@ public class Player : MonoBehaviour
                     {
                         if (!Manager.MainMenuActive)
                         {
-                            endGame();
+                            if(hit.collider.gameObject.GetComponent<Tile>().IsGolden)
+                            {
+                                Manager.AddGoldenTiles(50);
+                            }else
+                            {
+                                endGame();
+                            }
+                            
                         }
                         else
                         {

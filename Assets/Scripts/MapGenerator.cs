@@ -102,7 +102,7 @@ public class MapGenerator : MonoBehaviour
         if(isWhite)
         {
             tileWhiteZ -= 0.035f * tileScale;
-            GameObject gameobject = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
+            GameObject obj = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
             if (canChangeColor && WhiteTileNumber >= ChangeColorAfter)
             {
@@ -110,23 +110,33 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (percentageChance(0.3f))
                     {
-                        GenerateColorBall(gameobject);
+                        GenerateColorBall(obj);
                     }
                     var block = new MaterialPropertyBlock();
                     Color color = otherRandomColor();
 
+                    if (playerScript.Points >= 100)
+                    {
+                        
+                        if (percentageChance(0.1f))
+                        {
+                            color = Color.yellow;
+                            obj.GetComponentInChildren<Tile>().IsGolden = true;
+                            
+                        }
+                    }
 
-                    block.SetColor("_BaseColor", color); 
-                    gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
-                    gameobject.GetComponentInChildren<Tile>().TileColor = color;
+                    block.SetColor("_BaseColor", color);
+                    obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
+                    obj.GetComponentInChildren<Tile>().TileColor = color;
                     canChangeColor = false;
                 }
                 else
                 {
                     var block = new MaterialPropertyBlock();
                     block.SetColor("_BaseColor", CurrentColor);
-                    gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
-                    gameobject.GetComponentInChildren<Tile>().TileColor = CurrentColor;
+                    obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
+                    obj.GetComponentInChildren<Tile>().TileColor = CurrentColor;
                     canChangeColor = true;
                 }
             }
@@ -134,8 +144,8 @@ public class MapGenerator : MonoBehaviour
             {
                 var block = new MaterialPropertyBlock();
                 block.SetColor("_BaseColor", CurrentColor);
-                gameobject.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
-                gameobject.GetComponentInChildren<Tile>().TileColor = CurrentColor;
+                obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
+                obj.GetComponentInChildren<Tile>().TileColor = CurrentColor;
 
                 canChangeColor = true;
             }

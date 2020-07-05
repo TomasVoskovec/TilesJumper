@@ -5,4 +5,5 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public Color TileColor;
+    public bool IsGolden;
 }

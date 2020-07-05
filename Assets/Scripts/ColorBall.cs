@@ -36,6 +36,7 @@ public class ColorBall : MonoBehaviour
     }
     public void CollectParticlesEmit()
     {
+        ChangeColor();
         Instantiate(CollectParticles, new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z), CollectParticles.transform.rotation);
     }
 }
