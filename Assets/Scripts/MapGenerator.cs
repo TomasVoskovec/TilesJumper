@@ -101,13 +101,16 @@ public class MapGenerator : MonoBehaviour
     {
         if(isWhite)
         {
+            // Set tile z offset
             tileWhiteZ -= 0.035f * tileScale;
+            // Create tile game object
             GameObject obj = Instantiate(Tiles[tileNumber], new Vector3(0.485f * tileScale, 0, tileWhiteZ), new Quaternion(0, 0, 0, 0));
 
             if (canChangeColor && WhiteTileNumber >= ChangeColorAfter)
             {
                 if(percentageChance(0.5f))
                 {
+                    // Generate color changing ball
                     if (percentageChance(0.3f))
                     {
                         GenerateColorBall(obj);
@@ -117,15 +120,15 @@ public class MapGenerator : MonoBehaviour
 
                     if (playerScript.Points >= 100)
                     {
-                        
+                        // Generate golden tile
                         if (percentageChance(0.1f))
                         {
                             color = Color.yellow;
                             obj.GetComponentInChildren<Tile>().IsGolden = true;
-                            
                         }
                     }
 
+                    // Generate other color tile 
                     block.SetColor("_BaseColor", color);
                     obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
                     obj.GetComponentInChildren<Tile>().TileColor = color;
@@ -133,6 +136,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 else
                 {
+                    // Generate same color tile (chance)
                     var block = new MaterialPropertyBlock();
                     block.SetColor("_BaseColor", CurrentColor);
                     obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
@@ -142,6 +146,7 @@ public class MapGenerator : MonoBehaviour
             }
             else
             {
+                // Generate same color tile (have to)
                 var block = new MaterialPropertyBlock();
                 block.SetColor("_BaseColor", CurrentColor);
                 obj.GetComponentInChildren<MeshRenderer>().SetPropertyBlock(block);
@@ -154,6 +159,7 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
+            // Generate black color tile
             if(tileNumber == 1 || tileNumber == 6)
             {
                 tileBlackZ -= 0.035f * tileScale;
@@ -188,6 +194,8 @@ public class MapGenerator : MonoBehaviour
 
         return randomPercentage >= requiredChance;
     }
+
+    // Generates collor changing ball
     private void GenerateColorBall(GameObject tile)
     {
         GameObject ball = Instantiate(ColorBall, new Vector3(-1.56f, tile.transform.position.y + 0.5f, tile.transform.position.z - (0.035f * tileScale)), ColorBall.transform.rotation);
@@ -204,5 +212,4 @@ public class MapGenerator : MonoBehaviour
 
         CurrentColor = ballColor;
     }
-
 }
