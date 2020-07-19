@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     public GameObject TutorialBlock3;
     public GameObject TutorialBlock4;
     [Space]
+    [Header("GameInfo")]
+    public GameObject InfoUI;
+    [Space]
     [Header("Audio")]
     
     public AudioSource GameMusic;
@@ -192,5 +195,11 @@ public class GameManager : MonoBehaviour
     {
         BlackScreen.SetActive(true);
         BlackScreen.GetComponent<Animator>().SetTrigger(fade);
+    }
+    public void ShowInfo(bool value)
+    {
+        InfoUI.GetComponent<Animator>().SetTrigger("move");
+        challengeManager.MainMenu_UILogo.GetComponent<Animator>().SetTrigger("move");
+        challengeManager.MainMenu_UIStartButton.GetComponent<Animator>().SetTrigger("move");
     }
 }
