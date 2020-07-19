@@ -24,7 +24,9 @@ public class ChallengeManager : MonoBehaviour
     public TextMeshProUGUI PopUp_desc;
     public Image PopUp_bar;
     public TextMeshProUGUI PopUp_progress;
-
+    [Space]
+    [Header("Public references")]
+    public Menu Menu;
     private Player player;
 
     private int popUpQueue;
@@ -107,22 +109,24 @@ public class ChallengeManager : MonoBehaviour
         //Challenge_UI.SetActive(enable);
 
         //MainMenu_UI.SetActive(!enable);
-
-        Challenge_UI.GetComponent<Animator>().SetTrigger("move");
-        MainMenu_UILogo.GetComponent<Animator>().SetTrigger("move");
-        MainMenu_UIStartButton.GetComponent<Animator>().SetTrigger("move");
-
-        if (enable)
+        if (GetComponent<GameManager>().MainMenuActive)
         {
-            LoadChallenges();
-            
-        }
-        else
-        {
-           
-            foreach (Transform child in Content_parent.transform)
+            Challenge_UI.GetComponent<Animator>().SetTrigger("move");
+            MainMenu_UILogo.GetComponent<Animator>().SetTrigger("move");
+            MainMenu_UIStartButton.GetComponent<Animator>().SetTrigger("move");
+
+            if (enable)
             {
-                GameObject.Destroy(child.gameObject);
+                LoadChallenges();
+
+            }
+            else
+            {
+
+                foreach (Transform child in Content_parent.transform)
+                {
+                    GameObject.Destroy(child.gameObject);
+                }
             }
         }
     }
